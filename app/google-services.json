@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "745023132976",
+    "project_id": "annpurna-9fc37",
+    "storage_bucket": "annpurna-9fc37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:745023132976:android:512b498e7b4e4d051e24f5",
+        "android_client_info": {
+          "package_name": "com.example.annpurna"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCs1OjU03yAyztS2hWmefbi8H0yKsPgnQM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
