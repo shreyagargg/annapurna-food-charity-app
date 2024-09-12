@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Donate"
+        android:id="@+id/donate"
+        android:icon="@drawable/donate"
+        />
+
+    <item
+        android:title="Accept"
+        android:id="@+id/accept"
+        android:icon="@drawable/accept"
+        />
+
+    <item
+        android:title="Volunteer"
+        android:id="@+id/volunteer"
+        android:icon="@drawable/map"
+        />
+    <item
+        android:title="Profile"
+        android:id="@+id/profile"
+        android:icon="@drawable/profile"
+        />
+
+<!--    <item-->
+<!--        android:title="History"-->
+<!--        android:id="@+id/history"-->
+<!--        android:icon=""-->
+<!--        />-->
+
+</menu>
