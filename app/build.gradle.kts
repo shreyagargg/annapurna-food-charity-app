@@ -46,7 +46,6 @@ dependencies {
     implementation(libs.material.v190)
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation(libs.firebase.auth)
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

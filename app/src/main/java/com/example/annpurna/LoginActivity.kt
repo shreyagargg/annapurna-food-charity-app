@@ -2,11 +2,13 @@ package com.example.annpurna
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.text.TextUtils
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -33,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
         val fauth : FirebaseAuth = FirebaseAuth.getInstance()
         val register = findViewById<TextView>(R.id.register)
         val forgetPass = findViewById<TextView>(R.id.forgetPassword)
+        val hide = findViewById<Switch>(R.id.hide)
 
 
         login.setOnClickListener{
@@ -89,7 +92,25 @@ class LoginActivity : AppCompatActivity() {
                 }
         }
 
-    }
+        fun togglePasswordVisibility(isVisible: Boolean) {
+            if (isVisible) {
+                // Show password
+                password.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                hide.text = "Hide Password"
+            } else {
+                // Hide password
+                password.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                hide.text = "Show Password"
+            }
+            // Move the cursor to the end of the text
+            password.setSelection(password.text.length)
+        }
 
+        hide.setOnCheckedChangeListener { _, isChecked ->
+            togglePasswordVisibility(isChecked)
+        }
+
+
+    }
 
 }

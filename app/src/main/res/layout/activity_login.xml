@@ -33,8 +33,8 @@
         android:hint="Password"
         android:inputType="textPassword" />
 
-    <RadioButton
-        android:id="@+id/showHide"
+    <Switch
+        android:id="@+id/hide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Show Password" />
