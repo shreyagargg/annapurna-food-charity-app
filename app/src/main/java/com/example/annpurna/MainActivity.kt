@@ -1,6 +1,7 @@
 package com.example.annpurna
 
 import android.os.Bundle
+import android.widget.FrameLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -20,33 +21,34 @@ class MainActivity : AppCompatActivity() {
         }
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNavigation.setSelectedItemId(R.id.donate)
+        val frameLayout = findViewById<FrameLayout>(R.id.frame)
 
-        bottomNavigation.setOnItemSelectedListener { item->
-            when(item.itemId){
-                R.id.donate ->{
-                    supportFragmentManager.beginTransaction().replace(R.id.frame, DonorFragment()).commit()
-                    true
-                    }
-                R.id.accept ->{
-                    supportFragmentManager.beginTransaction().replace(R.id.frame, ReceiverFragment()).commit()
-                    true
-                }
-                R.id.volunteer ->{
-                    supportFragmentManager.beginTransaction().replace(R.id.frame, ReceiverFragment()).commit()
-                    true
-                }
-                R.id.profile ->{
-                    supportFragmentManager.beginTransaction().replace(R.id.frame, ReceiverFragment()).commit()
-                    true
-                }
-
-                else -> { false }
-            }
-
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.frame, DonorFragment())
+                .commit()
         }
 
+        bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.donate -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.frame, DonorFragment()).commit()
+                    true
+                }
+                R.id.accept -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.frame, ReceiverFragment()).commit()
+                    true
+                }
+                R.id.volunteer -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.frame, VolunteerFragment()).commit()
+                    true
+                }
+                R.id.profile -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.frame, ProfileFragment()).commit()
+                    true
+                }
+                else -> false
+            }
+        }
     }
-
-
 }

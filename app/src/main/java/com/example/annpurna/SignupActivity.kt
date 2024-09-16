@@ -58,7 +58,7 @@ class SignupActivity : AppCompatActivity() {
 
                     if (task.isSuccessful) {
                         Toast.makeText(this, "Sign up successful", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, MainActivity::class.java))
+                        startActivity(Intent(this, LoginActivity::class.java))
                         finish()
                     } else {
                         val errorMessage = task.exception?.message ?: "Sign up failed"

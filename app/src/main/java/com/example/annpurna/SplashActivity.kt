@@ -20,10 +20,9 @@ class SplashActivity : AppCompatActivity() {
             insets
         }
 
-        val min = 2000L // 2 seconds
+        val min = 4000L // 4 seconds
 
         Handler(Looper.getMainLooper()).postDelayed({
-            // Start the main activity
             val mainIntent = Intent(this@SplashActivity, LoginActivity::class.java)
             startActivity(mainIntent)
             finish()

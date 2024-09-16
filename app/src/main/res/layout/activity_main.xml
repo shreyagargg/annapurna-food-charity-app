@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/copper"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:id="@+id/toolbar">
 
         <TextView
@@ -23,16 +23,29 @@
             android:layout_marginStart="10dp"
             android:textStyle="bold" />
 
-        <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/setting"
-            android:layout_marginStart="230dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            app:tint="@color/white"
-            android:id="@+id/profile" />
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_below="@id/toolbar"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold" />
+
+<!--        <ImageButton-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:src="@drawable/setting"-->
+<!--            android:layout_marginStart="230dp"-->
+<!--            android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--            app:tint="@color/white"-->
+<!--            android:id="@+id/profile" />-->
 
     </LinearLayout>
+
+
 
     <FrameLayout
         android:layout_width="match_parent"
