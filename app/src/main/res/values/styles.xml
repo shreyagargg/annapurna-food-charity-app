@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomTextAppearance">
+        <item name="android:textSize">40sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="hintTextColor">#FF5722</item>
+        <item name="android:textStyle">italic</item>
+        <item name="backgroundTint">#00000000</item>
+        <item name="android:ems">12</item>
+    </style>
+
+    <style name="AppText" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textAppearance">@style/CustomTextAppearance</item>
+    </style>
+
+<!--    <style name="CustomToolbarStyle" parent="Widget.AppCompat.Toolbar">-->
+<!--        <item name="android:background">@color/copper</item> &lt;!&ndash; Set your background color &ndash;&gt;-->
+<!--        <item name="android:titleTextColor">@color/white</item> &lt;!&ndash; Set the title text color &ndash;&gt;-->
+<!--        <item name="android:popupTheme">@style/ThemeOverlay.AppCompat.Light</item> &lt;!&ndash; Theme for popup menus &ndash;&gt;-->
+<!--    </style>-->
+</resources>

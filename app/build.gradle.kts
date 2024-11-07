@@ -43,12 +43,13 @@ android {
 }
 
 dependencies {
-    implementation(libs.material.v190)
+//    implementation(libs.material.v190)
     implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation ("com.google.android.material:material:1.9.0")
     implementation(libs.firebase.auth)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
+//    implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.firebase.database)

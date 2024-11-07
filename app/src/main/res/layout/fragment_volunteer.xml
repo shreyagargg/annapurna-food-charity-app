@@ -1,14 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".VolunteerFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.example.annpurna.BGFile
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"/>
 
-</FrameLayout>
+    <!-- Top Profile Section -->
+    <LinearLayout
+        android:id="@+id/profile_header"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <!-- Profile Image -->
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:scaleType="centerCrop" />
+
+        <!-- Name -->
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello Richardson!"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Role -->
+        <TextView
+            android:id="@+id/profile_role"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Product Designer"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- Location and Contact -->
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Purwokerto, Indonesia"
+        android:textColor="#333333"
+        android:layout_below="@id/profile_header"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:drawablePadding="8dp" />
+
+    <TextView
+        android:id="@+id/contact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+62 1234 56789"
+        android:textColor="#333333"
+        android:layout_below="@id/location"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp" />
+
+    <!-- Statistics Section -->
+    <LinearLayout
+        android:id="@+id/statistics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contact"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Portfolio Count -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+<!--            <TextView-->
+<!--                android:text="100"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textColor="#333333"-->
+<!--                android:textStyle="bold"/>-->
+<!--            <TextView-->
+<!--                android:text="Portfolio"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textColor="#777777"/>-->
+        </LinearLayout>
+
+        <!-- Followers Count -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+<!--            <TextView-->
+<!--                android:text="200"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textColor="#333333"-->
+<!--                android:textStyle="bold" android:layout_height=""/>-->
+<!--            <TextView-->
+<!--                android:text="Followers"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textColor="#777777"/>-->
+        </LinearLayout>
+
+        <!-- Following Count -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+<!--            <TextView-->
+<!--                android:text="307"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textColor="#333333"-->
+<!--                android:textStyle="bold"/>-->
+<!--            <TextView-->
+<!--                android:text="Following"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textColor="#777777"/>-->
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Edit and Share Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/statistics"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/edit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            android:backgroundTint="#3F51B5"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/share_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Share"
+
+            android:backgroundTint="#3F51B5"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="16dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/myMaterialButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Click Me"
+            android:elevation="7dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"
+            app:backgroundTint="@color/copper"
+            app:cornerRadius="70dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="10dp"
+            android:textColor="@color/white"
+            app:icon="@drawable/pin"
+            app:iconGravity="textStart"
+            app:iconPadding="15dp"
+            app:iconSize="16dp" />
+
+    </LinearLayout>
+
+    <!-- About Me Section -->
+    <TextView
+        android:id="@+id/about_me_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="About Me"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp" />
+
+</RelativeLayout>

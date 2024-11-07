@@ -11,13 +11,6 @@
     android:background="@color/white"
     tools:context=".SplashActivity">
 
-<!--    <ImageView-->
-<!--        android:id="@+id/icon"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="400dp"-->
-<!--        android:background="@drawable/annapurna_logo"-->
-<!--     />-->
-
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationView"
         android:layout_width="wrap_content"

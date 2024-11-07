@@ -60,6 +60,7 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, MainActivity::class.java))
+                    finish()
                 } else {
                     val errorMessage = task.exception?.message ?: "Login failed"
                     Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
@@ -70,6 +71,8 @@ class LoginActivity : AppCompatActivity() {
 
         register.setOnClickListener{
             startActivity(Intent(this, SignupActivity::class.java))
+            overridePendingTransition(android.R.anim.cycle_interpolator,android.R.anim.fade_out)
+            finish()
         }
 
         fun resetPassword(email: String) {

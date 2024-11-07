@@ -1,200 +1,357 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="30dp"
     tools:context=".ProfileFragment">
 
-    <androidx.cardview.widget.CardView
+    <com.example.annpurna.BGFile
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="40dp"
-        android:alpha="0.9"
-        android:backgroundTint="@color/copper"
-        app:cardElevation="40dp">
+        android:layout_height="match_parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/profile_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:ems="12"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="italic"
-                android:backgroundTint="#00000000"
-                android:hint="Name" />
-
-            <EditText
-                android:id="@+id/mail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="start|top"
-                android:ems="12"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="italic"
-                android:backgroundTint="#00000000"
-                android:hint="E-mail"
-                android:inputType="textMultiLine" />
-
-            <EditText
-                android:id="@+id/dob"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="12"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="italic"
-                android:backgroundTint="#00000000"
-                android:hint="Date of Birth"
-                android:inputType="date" />
-
-
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select Gender"
-                android:layout_gravity="start"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/white"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/profile"
+                android:textColor="#FFFFFF"
                 android:textSize="22sp"
-                android:textStyle="italic"/>
+                android:textStyle="bold" />
 
-            <RadioGroup
-                android:id="@+id/radio_group"
-                android:orientation="horizontal"
+            <!-- Profile Image -->
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="70dp"
+                android:background="@drawable/circle"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile"
+                app:tint="@color/black" />
+
+            <TextView
+                android:id="@+id/name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Hey"
+                android:textColor="@color/copper"
+                android:textSize="22sp"
+                android:textStyle="italic" />
 
-                <RadioButton
-                    android:id="@+id/radio_kg"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/phone"
+                    app:tint="@color/copper" />
+
+                <TextView
+                    android:id="@+id/phn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    android:layout_marginStart="10dp"
+                    android:text="Hello "
+                    android:textColor="@color/copper"
                     android:textSize="22sp"
-                    android:text="Male" />
+                    android:textStyle="italic" />
+            </LinearLayout>
 
-                <RadioButton
-                    android:id="@+id/radio_number"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/email"
+                    app:tint="@color/copper" />
+
+                <TextView
+                    android:id="@+id/mail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="10dp"
+                    android:text="Hello "
+                    android:textColor="@color/copper"
                     android:textSize="22sp"
-                    android:text="Female" />
+                    android:textStyle="italic" />
+            </LinearLayout>
 
-            </RadioGroup>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="40dp"
+                app:cardElevation="10dp">
 
-            <EditText
-                android:id="@+id/phone"
+                <EditText
+                    android:id="@+id/state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:hint="@string/state"
+                    android:backgroundTint="#ffffff"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/copper"
+                    android:textSize="30sp"
+                    android:textStyle="italic" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="40dp"
+                app:cardElevation="10dp">
+
+                <EditText
+                    android:id="@+id/city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:hint="@string/city"
+                    android:backgroundTint="#ffffff"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/copper"
+                    android:textSize="30sp"
+                    android:textStyle="italic" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="40dp"
+                app:cardElevation="10dp">
+
+                <EditText
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:hint="@string/address"
+                    android:backgroundTint="#ffffff"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/copper"
+                    android:textSize="30sp"
+                    android:textStyle="italic" />
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/update"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="12"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
+                android:layout_height="60dp"
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/copper"
+                android:text="Update"
                 android:textSize="22sp"
-                android:textStyle="italic"
-                android:hint="Contact number"
-                android:backgroundTint="#00000000"
-                android:inputType="date" />
-
-            <EditText
-                android:id="@+id/state"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="12"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="italic"
-                android:hint="State"
-                android:backgroundTint="#00000000"
-                android:inputType="textMultiLine" />
-
-            <EditText
-                android:id="@+id/city"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="12"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="italic"
-                android:hint="City"
-                android:backgroundTint="#00000000"
-                android:inputType="textMultiLine" />
-
-            <EditText
-                android:id="@+id/code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="12"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="italic"
-                android:hint="Pin Code"
-                android:backgroundTint="#00000000"
-                android:inputType="number" />
-
-            <EditText
-                android:id="@+id/address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="12"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="italic"
-                android:hint="Address"
-                android:backgroundTint="#00000000"
-                android:inputType="textMultiLine" />
-
-
-            <!--    <fragment-->
-            <!--        android:id="@+id/map"-->
-            <!--        android:name="com.google.android.gms.maps.SupportMapFragment"-->
-            <!--        android:layout_width="match_parent"-->
-            <!--        android:layout_height="200dp"/>-->
-
-            <!--        <fragment-->
-            <!--            android:id="@+id/map"-->
-            <!--            xmlns:map="http://schemas.android.com/apk/res-auto"-->
-            <!--            android:name="com.google.android.gms.maps.SupportMapFragment"-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:layout_height="200dp"-->
-            <!--            android:layout_marginTop="20dp"-->
-            <!--            map:uiZoomControls="true"-->
-            <!--            tools:ignore="FragmentTagUsage" />-->
+                android:textStyle="bold" />
 
         </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <Button
-        android:id="@+id/update"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginTop="520dp"
-        android:layout_marginLeft="120dp"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:backgroundTint="@color/copper"
-        android:text="Update" />
-
-
-
+    </ScrollView>
 </FrameLayout>
+
+
+
+    <!--    <androidx.cardview.widget.CardView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:cardCornerRadius="40dp"-->
+    <!--        android:alpha="0.8"-->
+    <!--        android:layout_marginTop="500dp"-->
+    <!--        android:backgroundTint="@color/copper"-->
+    <!--        app:cardElevation="40dp">-->
+
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:gravity="center"-->
+    <!--            android:orientation="vertical">-->
+
+    <!--            <EditText-->
+    <!--                android:id="@+id/names"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:inputType="text"-->
+    <!--                android:ems="12"-->
+    <!--                android:textColorHint="@color/white"-->
+    <!--                android:textColor="@color/white"-->
+    <!--                android:textSize="22sp"-->
+    <!--                android:textStyle="italic"-->
+    <!--                android:backgroundTint="#00000000"-->
+    <!--                android:hint="Name" />-->
+
+    <!--            <EditText-->
+    <!--                android:id="@+id/mail"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:gravity="start|top"-->
+    <!--                android:ems="12"-->
+    <!--                android:textColorHint="@color/white"-->
+    <!--                android:textColor="@color/white"-->
+    <!--                android:textSize="22sp"-->
+    <!--                android:textStyle="italic"-->
+    <!--                android:backgroundTint="#00000000"-->
+    <!--                android:hint="E-mail"-->
+    <!--                android:inputType="textMultiLine" />-->
+
+    <!--            <EditText-->
+    <!--                android:id="@+id/dob"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:ems="12"-->
+    <!--                android:textColorHint="@color/white"-->
+    <!--                android:textColor="@color/white"-->
+    <!--                android:textSize="22sp"-->
+    <!--                android:textStyle="italic"-->
+    <!--                android:backgroundTint="#00000000"-->
+    <!--                android:hint="Date of Birth"-->
+    <!--                android:inputType="date" />-->
+
+    <!--            <EditText-->
+    <!--                android:id="@+id/phone"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:ems="12"-->
+    <!--                android:textColorHint="@color/white"-->
+    <!--                android:textColor="@color/white"-->
+    <!--                android:textSize="22sp"-->
+    <!--                android:textStyle="italic"-->
+    <!--                android:hint="Contact number"-->
+    <!--                android:backgroundTint="#00000000"-->
+    <!--                android:inputType="date" />-->
+
+
+    <!--            <TextView-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="Select Gender"-->
+    <!--                android:layout_gravity="start"-->
+    <!--                android:layout_marginLeft="20dp"-->
+    <!--                android:textColor="@color/white"-->
+    <!--                android:textSize="22sp"-->
+    <!--                android:textStyle="italic"/>-->
+
+    <!--            <RadioGroup-->
+    <!--                android:id="@+id/radio_group"-->
+    <!--                android:orientation="horizontal"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content">-->
+
+    <!--                <RadioButton-->
+    <!--                    android:id="@+id/radio_kg"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:textColor="@color/white"-->
+    <!--                    android:textSize="22sp"-->
+    <!--                    android:text="Male" />-->
+
+    <!--                <RadioButton-->
+    <!--                    android:id="@+id/radio_number"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:textColor="@color/white"-->
+    <!--                    android:layout_marginLeft="20dp"-->
+    <!--                    android:textSize="22sp"-->
+    <!--                    android:text="Female" />-->
+
+    <!--            </RadioGroup>-->
+
+    <!--            <EditText-->
+    <!--                android:id="@+id/state"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:ems="12"-->
+    <!--                android:textColorHint="@color/white"-->
+    <!--                android:textColor="@color/white"-->
+    <!--                android:textSize="22sp"-->
+    <!--                android:textStyle="italic"-->
+    <!--                android:hint="State"-->
+    <!--                android:backgroundTint="#00000000"-->
+    <!--                android:inputType="textMultiLine" />-->
+
+    <!--            <EditText-->
+    <!--                android:id="@+id/city"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:ems="12"-->
+    <!--                android:textColorHint="@color/white"-->
+    <!--                android:textColor="@color/white"-->
+    <!--                android:textSize="22sp"-->
+    <!--                android:textStyle="italic"-->
+    <!--                android:hint="City"-->
+    <!--                android:backgroundTint="#00000000"-->
+    <!--                android:inputType="textMultiLine" />-->
+
+    <!--            <EditText-->
+    <!--                android:id="@+id/code"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:ems="12"-->
+    <!--                android:textColorHint="@color/white"-->
+    <!--                android:textColor="@color/white"-->
+    <!--                android:textSize="22sp"-->
+    <!--                android:textStyle="italic"-->
+    <!--                android:hint="Pin Code"-->
+    <!--                android:backgroundTint="#00000000"-->
+    <!--                android:inputType="number" />-->
+
+    <!--            <EditText-->
+    <!--                android:id="@+id/address"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:ems="12"-->
+    <!--                android:textColorHint="@color/white"-->
+    <!--                android:textColor="@color/white"-->
+    <!--                android:textSize="22sp"-->
+    <!--                android:textStyle="italic"-->
+    <!--                android:hint="Address"-->
+    <!--                android:backgroundTint="#00000000"-->
+    <!--                android:inputType="textMultiLine" />-->
+
+
+    <!--    <fragment-->
+    <!--        android:id="@+id/map"-->
+    <!--        android:name="com.google.android.gms.maps.SupportMapFragment"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="200dp"/>-->
+
+    <!--        <fragment-->
+    <!--            android:id="@+id/map"-->
+    <!--            xmlns:map="http://schemas.android.com/apk/res-auto"-->
+    <!--            android:name="com.google.android.gms.maps.SupportMapFragment"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="200dp"-->
+    <!--            android:layout_marginTop="20dp"-->
+    <!--            map:uiZoomControls="true"-->
+    <!--            tools:ignore="FragmentTagUsage" />-->
+
+    <!--        </LinearLayout>-->
+
+    <!--    </androidx.cardview.widget.CardView>-->
+

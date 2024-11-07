@@ -70,6 +70,7 @@ class SignupActivity : AppCompatActivity() {
 
         login.setOnClickListener{
             startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
 
         fun togglePasswordVisibility(isVisible: Boolean) {

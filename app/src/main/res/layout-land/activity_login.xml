@@ -15,7 +15,7 @@
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="170dp"
+        android:layout_marginBottom="60dp"
         android:backgroundTint="@color/white"
         app:cardCornerRadius="40dp"
         app:cardElevation="10dp">
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/email"
                 android:drawablePadding="10dp"
-                android:hint="@string/mail"
+                android:hint="E-mail"
                 android:inputType="textEmailAddress" />
 
             <EditText
@@ -41,28 +41,28 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/lock"
                 android:drawablePadding="10dp"
-                android:hint="@string/password"
+                android:hint="Password"
                 android:inputType="textPassword" />
 
             <Switch
                 android:id="@+id/hide"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/hide" />
+                android:text="Show Password" />
 
             <TextView
                 android:id="@+id/forgetPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/pass" />
+                android:text="Forget Password" />
 
             <TextView
                 android:id="@+id/register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/regis" />
+                android:text="Want to register" />
 
         </LinearLayout>
 
@@ -72,14 +72,15 @@
         android:id="@+id/signIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:backgroundTint="@color/copper"
-        android:text="@string/sign" />
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        android:text="Sign in" />
 
     <ProgressBar
         android:id="@+id/bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="450dp" />
+        android:layout_marginTop="310dp" />
 
 </FrameLayout>
