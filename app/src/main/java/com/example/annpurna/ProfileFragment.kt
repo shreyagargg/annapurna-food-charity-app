@@ -42,7 +42,6 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
         val name = view.findViewById<TextView>(R.id.name)
@@ -54,38 +53,20 @@ class ProfileFragment : Fragment() {
         val update = view.findViewById<Button>(R.id.update)
 
 
-//        val data = csvReader.readCSVFromRaw(this, R.raw.city)
-
-//        if(code.isNotEmpty()){
-//            city.text = data[1].state
-//        }
-//        else
-//            city.text = "State and City"
-
-
-//        val locationList = csvReader.readCSVFromRaw(requireContext(), R.raw.city)
-
         update.setOnClickListener {
             val pincode = code.text.toString().trim()
 
             if (pincode.isNotEmpty()) {
-                // Find the location by pincode
                 val location = locationList.find { it.pincode == pincode }
                 Toast.makeText(context,"$location", Toast.LENGTH_SHORT).show()
 
                 if (location != null) {
-                    // Display state and city
                     city.text = "${location.state} / ${location.location}"
-//                    cityTextView.text = "City: ${location.city}"
                 } else {
-                    // If no matching location is found
                     city.text = "Not Found"
-//                    cityTextView.text = "City: Not Found"
                 }
             } else {
-                // Handle empty input
                 city.text = "Please enter a valid pincode."
-//                cityTextView.text = ""
             }
         }
 
