@@ -107,16 +107,17 @@
                 app:cardElevation="10dp">
 
                 <EditText
-                    android:id="@+id/state"
+                    android:id="@+id/pc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:hint="@string/state"
                     android:backgroundTint="#ffffff"
-                    android:textColor="@color/black"
+                    android:textColor="@color/copper"
                     android:textColorHint="@color/copper"
                     android:textSize="30sp"
-                    android:textStyle="italic" />
+                    android:textStyle="italic"
+                    android:inputType="number"/>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -127,15 +128,13 @@
                 app:cardCornerRadius="40dp"
                 app:cardElevation="10dp">
 
-                <EditText
+                <TextView
                     android:id="@+id/city"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:hint="@string/city"
                     android:backgroundTint="#ffffff"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/copper"
+                    android:textColor="@color/copper"
                     android:textSize="30sp"
                     android:textStyle="italic" />
             </androidx.cardview.widget.CardView>

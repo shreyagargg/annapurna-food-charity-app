@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Annapurna</string>
     <string name="profile">My Profile</string>
-    <string name="state">Enter state name</string>
+    <string name="state">Enter pin code number</string>
     <string name="city">Enter city name</string>
     <string name="address">Enter Address</string>
     <string name="regis">Want to register</string>
