@@ -17,6 +17,7 @@
         android:layout_height="300dp"
         android:layout_marginTop="100dp"
         android:layout_marginStart="50dp"
+        android:transitionName="trans"
         android:background="@drawable/circle"
         android:backgroundTint="@color/copper"
         android:src="@drawable/profile" />
@@ -27,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="80dp"
+            android:transitionName="names"
             android:text=""
             android:textColor="@color/copper"
             android:textSize="30sp"

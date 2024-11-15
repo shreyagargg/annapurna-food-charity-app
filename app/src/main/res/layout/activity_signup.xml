@@ -17,9 +17,21 @@
         android:src="@drawable/annapurna_logo" />
 
     <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/profile"
+        android:drawablePadding="10dp"
+        android:autofillHints="Username"
+        android:hint="@string/name"
+        android:inputType="textEmailAddress" />
+
+    <EditText
         android:id="@+id/mail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableStart="@drawable/email"
+        android:drawablePadding="10dp"
         android:autofillHints="email"
         android:hint="@string/mail"
         android:inputType="textEmailAddress" />
@@ -28,8 +40,21 @@
         android:id="@+id/pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableStart="@drawable/lock"
+        android:drawablePadding="10dp"
         android:autofillHints="password"
         android:hint="@string/password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/phn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/phone"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/copper"
+        android:autofillHints="password"
+        android:hint="@string/phn"
         android:inputType="textPassword" />
 
     <Switch
