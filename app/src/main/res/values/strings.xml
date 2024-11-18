@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Annapurna</string>
+    <string name="name">Username</string>
     <string name="profile">My Profile</string>
     <string name="state">Enter pin code number</string>
     <string name="city">Enter city name</string>
@@ -11,6 +12,7 @@
     <string name="mail">E-mail</string>
     <string name="sign">Sign In</string>
     <string name="log">Sign Up</string>
+    <string name="phn">Contact Number</string>
     <string name="login">Already have an account, Login</string>
 
     <string-array name="foodItems">
@@ -30,5 +32,78 @@
     <!--        <item>preserved</item>-->
     <!--        <item>Beverages</item>-->
     <!--    </string-array>-->
+
+
+    <string name="terms_head">Terms and Conditions</string>
+    <string name="terms">Welcome to our app Annapurna. By using our mobile application, you agree to comply with and be bound by these Terms and Conditions. Please read them carefully before using our Service.\n
+
+1. Acceptance of Terms\n
+By accessing or using the Service, you agree to comply with these Terms and Conditions, along with any applicable laws and regulations. If you do not agree with these terms, please do not use the Service.\n
+
+2. Eligibility\n
+You must be at least 18 years old to use this Service. By using the Service, you represent and warrant that you are at least 18 years old and legally capable of entering into a binding agreement.\n
+
+3. Donations\n
+The Service allows users to donate leftover food, raw food items, or provide volunteer services for food distribution. By donating food, you agree to the following:\n
+
+The food provided is safe for human consumption.\n
+You will comply with all local food safety regulations.
+The food you donate is either surplus or unused, and it has not been contaminated, spoiled, or otherwise unsafe for consumption.
+We reserve the right to reject any donations that do not meet our safety standards.
+4. Receiving Donations
+If you are a recipient of donated food, you acknowledge that:
+
+You will use the food in a manner that is consistent with public health and safety.
+The food you receive is provided "as is," without any warranty or guarantee of quality.
+You will notify us immediately if any donated food appears to be unsafe for consumption.
+You will not resell or distribute the donated food for commercial purposes.
+5. Volunteer Services
+Users can offer volunteer services to help distribute food or support the operation of the Service. By offering volunteer services, you agree to:
+
+Perform the volunteer work in accordance with applicable laws, regulations, and safety standards.
+Act in good faith and with integrity while participating in volunteer activities.
+Comply with any additional guidelines or instructions provided by us during the volunteer process.
+6. User Responsibilities
+As a user of the Service, you agree:
+
+Not to misuse the Service or engage in fraudulent or illegal activities.
+To ensure that the information you provide is accurate, complete, and up-to-date.
+To maintain the confidentiality of your account information, including username and password, if applicable.
+To notify us promptly if you believe your account has been compromised or if you encounter any issues with the Service.
+7. Privacy
+Your use of the Service is also governed by our Privacy Policy, which explains how we collect, use, and protect your personal information. By using the Service, you consent to the collection and use of your information as described in our Privacy Policy.
+
+8. Intellectual Property
+All content, features, and functionality of the Service, including but not limited to text, graphics, logos, and images, are the exclusive property of [Your App Name] or its licensors and are protected by intellectual property laws. You may not use, copy, modify, or distribute any content from the Service without our express permission.
+
+9. Prohibited Activities
+You agree not to:
+
+Violate any applicable law, regulation, or third-party rights in connection with your use of the Service.
+Upload or share any content that is harmful, offensive, defamatory, or illegal.
+Use the Service to distribute spam, malware, or viruses.
+Engage in any activity that could damage, disable, or impair the Service.
+10. Termination
+We may suspend or terminate your access to the Service at any time, without notice, if you violate these Terms and Conditions or engage in behavior that we deem inappropriate or harmful to the Service or other users.
+
+11. Limitation of Liability
+To the maximum extent permitted by law, [Your App Name] shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Service or any donated food, even if we have been advised of the possibility of such damages.
+
+12. Indemnification
+You agree to indemnify and hold harmless [Your App Name], its affiliates, employees, volunteers, and partners from any claims, damages, or losses resulting from your use of the Service or your violation of these Terms and Conditions.
+
+13. Governing Law
+These Terms and Conditions shall be governed by and construed in accordance with the laws of [Insert your jurisdiction or country]. Any dispute arising from or related to these Terms and Conditions shall be subject to the exclusive jurisdiction of the courts in [Insert location].
+
+14. Changes to Terms and Conditions
+We reserve the right to modify, update, or change these Terms and Conditions at any time. Any changes will be effective immediately upon posting on the Service. We encourage you to review these Terms periodically to stay informed about any updates.
+
+15. Contact Us
+If you have any questions or concerns about these Terms and Conditions, please contact us at:
+
+Email: abc@abc.com
+Phone: 7712366549
+</string>
+
 
 </resources>

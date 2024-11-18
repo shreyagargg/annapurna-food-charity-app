@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -51,6 +52,30 @@ class ProfileFragment : Fragment() {
         val city = view.findViewById<TextView>(R.id.city)
         val address = view.findViewById<EditText>(R.id.address)
         val update = view.findViewById<Button>(R.id.update)
+        val image = view.findViewById<ImageView>(R.id.profile)
+
+        image.setOnClickListener {
+            // Create a bundle for the fragment transition
+//            val bundle = Bundle()
+
+            // Create a FragmentTransaction with shared element
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+
+            // Specify the shared element transition
+            transaction.setReorderingAllowed(true)
+            transaction.addSharedElement(image, "shared_image")
+            transaction.addSharedElement(name, "name")
+
+            val destinationFragment = ProfileView()
+
+            // Optional: Add data to the destination fragment (if needed)
+            val bundle = Bundle()
+            destinationFragment.arguments = bundle
+
+            transaction.replace(R.id.frame, destinationFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
 
 
         update.setOnClickListener {

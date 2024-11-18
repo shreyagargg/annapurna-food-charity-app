@@ -70,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         register.setOnClickListener{
-            startActivity(Intent(this, SignupActivity::class.java))
+            startActivity(Intent(this, TermsActivity::class.java))
             overridePendingTransition(android.R.anim.cycle_interpolator,android.R.anim.fade_out)
             finish()
         }
