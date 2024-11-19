@@ -6,7 +6,8 @@ plugins {
 
 android {
     namespace = "com.example.annpurna"
-    compileSdk = 34 // Use the latest SDK version
+    compileSdk = 35
+    // Use the latest SDK version
 
     defaultConfig {
         applicationId = "com.example.annpurna"

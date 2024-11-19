@@ -111,6 +111,9 @@ Phone: 7712366549
     <string name="add_more">+ Add More</string>
     <string name="donate">Donate</string>
     <string name="item_image">Item Image</string>
+    <string name="close">1</string>
+    <string name="take">Take</string>
+    <string name="details_about_the_item_will_go_here">Details about the item will go here.</string>
 
 
 </resources>
