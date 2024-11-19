@@ -70,10 +70,10 @@
         android:id="@+id/divider"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:id="@+id/bottom_navigation"
-        app:menu="@menu/bottom_navigation"/>
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_navigation" />
 
 </RelativeLayout>
