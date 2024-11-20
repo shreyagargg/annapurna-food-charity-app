@@ -1,23 +1,14 @@
 package com.example.annpurna
 
-import android.app.Activity
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.Spinner
-import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
+import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -27,23 +18,21 @@ class DonorFragment : Fragment() {
 
     private lateinit var database: DatabaseReference
     private lateinit var storage: StorageReference
-    private lateinit var pickImage: ActivityResultLauncher<Intent>
     private var imageUri: Uri? = null
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var donorAdapter: DonorAdapter
+    private var donorList: ArrayList<DonorModel> = ArrayList()
+
+    private lateinit var addMoreButton: Button
+    private lateinit var donateButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Firebase instance initialization
         database = FirebaseDatabase.getInstance().reference
         storage = FirebaseStorage.getInstance().reference
-
-
-
-//        pickImage = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-//            if (result.resultCode == Activity.RESULT_OK) {
-//                imageUri = result.data?.data
-//                view?.findViewById<ImageView>(R.id.image)?.setImageURI(imageUri)
-//            }
-//        }
     }
 
     override fun onCreateView(
@@ -52,79 +41,71 @@ class DonorFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_donor, container, false)
 
-        val name: EditText = view.findViewById(R.id.name)
-        val desc: EditText = view.findViewById(R.id.desc)
-        val exp: EditText = view.findViewById(R.id.exp)
-        val quantity: EditText = view.findViewById(R.id.quantity)
-//        val cityEditText: EditText = view.findViewById(R.id.city)
-//        val codeEditText: EditText = view.findViewById(R.id.code)
-        val donateButton: Button = view.findViewById(R.id.donate)
-//        val imageButton: ImageButton = view.findViewById(R.id.image)
+        // Initialize views
+        recyclerView = view.findViewById(R.id.recycler_view)
+        addMoreButton = view.findViewById(R.id.addMore)
+        donateButton = view.findViewById(R.id.donate)
 
-        donateButton.setOnClickListener {
-            val foodItem = name.text.toString()
-            val description = desc.text.toString()
-            val dateExp = exp.text.toString()
-            val quan = quantity.text.toString()
-//            val cityName = cityEditText.text.toString()
-//            val codeN = codeEditText.text.toString()
+        // Set up RecyclerView
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        donorAdapter = DonorAdapter(donorList)
+        recyclerView.adapter = donorAdapter
 
-            if (foodItem.isNotBlank() && description.isNotBlank() && dateExp.isNotBlank()
-                && quan.isNotBlank()
-            ) {
-//                saveData(foodItem, description, dateExp, quan)
-                Toast.makeText(
-                    requireContext(),
-                    "Donation of $foodItem Successful",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else {
-                Toast.makeText(requireContext(), "Please fill all columns", Toast.LENGTH_SHORT)
-                    .show()
-            }
+        // Add the initial donation form
+        addNewForm()
+
+        // Add More button click listener
+        addMoreButton.setOnClickListener {
+            addNewForm()
         }
 
-
-        val mySpinner: Spinner = view.findViewById(R.id.spinner)
-        val items = resources.getStringArray(R.array.foodItems).toList()
-        val adapter = FoodType(requireContext(), items)
-        mySpinner.adapter = adapter
-
-
-
-
-
-//        imageButton.setOnClickListener {
-//            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-//            pickImage.launch(intent)
-//        }
+        // Donate button click listener (to save data in Firebase)
+        donateButton.setOnClickListener {
+            saveAllData()
+        }
 
         return view
     }
 
-    private fun saveData(
-        foodItem: String,
-        description: String,
-        dateExp: String,
-        stateName: String,
-        cityName: String,
-        codeN: String
-    ) {
+    private fun addNewForm() {
+        // Add a new empty form to the donor list
+        donorList.add(DonorModel("", "", "", "kg", "")) // Empty fields for the new form
+        donorAdapter.notifyItemInserted(donorList.size - 1)
+        Toast.makeText(requireContext(), "new view", Toast.LENGTH_SHORT).show()
+
+    }
+
+    private fun saveAllData() {
+        for (donor in donorList) {
+            if (donor.name.isNotBlank() && donor.description.isNotBlank() &&
+                donor.date.isNotBlank() && donor.quantity.isNotBlank()) {
+                saveData(donor)
+            }
+            else
+                Toast.makeText(requireContext(), "Mark entries first", Toast.LENGTH_SHORT).show()
+
+        }
+    }
+
+    private fun saveData(donor: DonorModel) {
         val donationId = database.child("Donations").push().key ?: return
 
+        // Saving data to Firebase
         val donationData = mapOf(
-            "foodItem" to foodItem,
-            "description" to description,
-            "date" to dateExp,
-            "state" to stateName,
-            "city" to cityName,
-            "pinCode" to codeN
+            "foodItem" to donor.name,
+            "description" to donor.description,
+            "date" to donor.date,
+            "quantity" to donor.quantity
         )
 
+        // Save to Firebase database
         database.child("Donations").child(donationId).setValue(donationData)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    uploadImage(donationId)
+                    Toast.makeText(requireContext(), "Successfull to save data", Toast.LENGTH_SHORT).show()
+
+                    // Uncomment if you want to upload an image with the donation
+                    // uploadImage(donationId)
                 } else {
                     Toast.makeText(requireContext(), "Failed to save data", Toast.LENGTH_SHORT).show()
                 }

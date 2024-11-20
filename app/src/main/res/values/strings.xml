@@ -14,6 +14,16 @@
     <string name="log">Sign Up</string>
     <string name="phn">Contact Number</string>
     <string name="login">Already have an account, Login</string>
+    <string name="add_image">Add Image</string>
+    <string name="item_name">Item Name</string>
+    <string name="item_description">Item Description</string>
+    <string name="expiry_date">Expiry Date</string>
+    <string name="add_more">+ Add More</string>
+    <string name="donate">Donate</string>
+    <string name="item_image">Item Image</string>
+    <string name="close">1</string>
+    <string name="take">Take</string>
+    <string name="details_about_the_item_will_go_here">Details about the item will go here.</string>
 
     <string-array name="foodItems">
         <item>Perishable</item>
@@ -23,6 +33,11 @@
         <item>preserved</item>
         <item>Beverages</item>
     </string-array>
+
+    <string name="kg">Kg</string>
+    <string name="num">Number</string>
+    <string name="liter">Litres</string>
+
 
     <!--    <string-array name="foodAllergens">-->
     <!--        <item>Nuts</item>-->
@@ -104,16 +119,7 @@ If you have any questions or concerns about these Terms and Conditions, please c
 Email: abc@abc.com
 Phone: 7712366549
 </string>
-    <string name="add_image">Add Image</string>
-    <string name="item_name">Item Name</string>
-    <string name="item_description">Item Description</string>
-    <string name="expiry_date">Expiry Date</string>
-    <string name="add_more">+ Add More</string>
-    <string name="donate">Donate</string>
-    <string name="item_image">Item Image</string>
-    <string name="close">1</string>
-    <string name="take">Take</string>
-    <string name="details_about_the_item_will_go_here">Details about the item will go here.</string>
+
 
 
 </resources>
