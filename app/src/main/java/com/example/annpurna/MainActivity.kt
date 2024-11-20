@@ -1,7 +1,9 @@
 package com.example.annpurna
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -50,5 +52,14 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        val name = findViewById<TextView>(R.id.name)
+        loadSavedData(name)
+    }
+
+    private fun loadSavedData(data: TextView) {
+        val sharedPreferences: SharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
+        val savedText = sharedPreferences.getString("savedText", "data")
+        data.text = "Hello $savedText"
     }
 }

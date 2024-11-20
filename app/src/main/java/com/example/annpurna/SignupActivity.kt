@@ -1,6 +1,7 @@
 package com.example.annpurna
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.InputType
 import android.text.TextUtils
@@ -30,6 +31,8 @@ class SignupActivity : AppCompatActivity() {
 
         val email = findViewById<EditText>(R.id.mail)
         val password = findViewById<EditText>(R.id.pass)
+        val name = findViewById<EditText>(R.id.name)
+
         val signup = findViewById<Button>(R.id.sign)
         val bar = findViewById<ProgressBar>(R.id.bar)
         val fauth : FirebaseAuth = FirebaseAuth.getInstance()
@@ -39,6 +42,7 @@ class SignupActivity : AppCompatActivity() {
         signup.setOnClickListener {
             val mail: String = email.text.toString().trim()
             val pass: String = password.text.toString().trim()
+            val Name: String = name.text.toString().trim()
 
             if (TextUtils.isEmpty(mail)) {
                 email.error = "Required section"
@@ -49,6 +53,12 @@ class SignupActivity : AppCompatActivity() {
                 password.error = "Required section"
                 return@setOnClickListener
             }
+
+            if (TextUtils.isEmpty(Name)) {
+                name.error = "Required section"
+                return@setOnClickListener
+            }
+            saveData(Name)
 
             bar.setVisibility(View.VISIBLE)
 
@@ -90,5 +100,12 @@ class SignupActivity : AppCompatActivity() {
         hide.setOnCheckedChangeListener { _, isChecked ->
             togglePasswordVisibility(isChecked)
         }
+    }
+
+    private fun saveData(text: String) {
+        val sharedPreferences: SharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("savedText", text)
+        editor.apply()  // Apply the changes
     }
 }

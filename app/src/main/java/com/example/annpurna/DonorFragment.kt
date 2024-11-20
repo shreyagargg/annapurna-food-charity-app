@@ -105,7 +105,7 @@ class DonorFragment : Fragment() {
                     Toast.makeText(requireContext(), "Successfull to save data", Toast.LENGTH_SHORT).show()
 
                     // Uncomment if you want to upload an image with the donation
-                    // uploadImage(donationId)
+//                     uploadImage(donationId)
                 } else {
                     Toast.makeText(requireContext(), "Failed to save data", Toast.LENGTH_SHORT).show()
                 }

@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Annapurna</string>
     <string name="name">Username</string>
-    <string name="profile">My Profile</string>
+    <string name="qt">Select Quantity</string>
+    <string name="qty">Enter Quantity</string>
     <string name="state">Enter pin code number</string>
     <string name="city">Enter city name</string>
     <string name="address">Enter Address</string>
@@ -23,7 +24,11 @@
     <string name="item_image">Item Image</string>
     <string name="close">1</string>
     <string name="take">Take</string>
-    <string name="details_about_the_item_will_go_here">Details about the item will go here.</string>
+    <string name="item_detail">Details about the item will go here.</string>
+    <string name="tNc">I agree to the Terms and Conditions.</string>
+    <string name="accept">Accept.</string>
+    <string name="item">Item Name</string>
+
 
     <string-array name="foodItems">
         <item>Perishable</item>
@@ -62,9 +67,9 @@ You must be at least 18 years old to use this Service. By using the Service, you
 The Service allows users to donate leftover food, raw food items, or provide volunteer services for food distribution. By donating food, you agree to the following:\n
 
 The food provided is safe for human consumption.\n
-You will comply with all local food safety regulations.
-The food you donate is either surplus or unused, and it has not been contaminated, spoiled, or otherwise unsafe for consumption.
-We reserve the right to reject any donations that do not meet our safety standards.
+You will comply with all local food safety regulations.\n
+The food you donate is either surplus or unused, and it has not been contaminated, spoiled, or otherwise unsafe for consumption.\n
+We reserve the right to reject any donations that do not meet our safety standards.\n
 4. Receiving Donations
 If you are a recipient of donated food, you acknowledge that:
 

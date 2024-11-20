@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="22sp"
-        android:textColor="@color/white"
-        android:background="@color/copper"
-        android:padding="8dp" />
+        android:textColor="@color/black"
+        android:background="@color/white"
+        android:padding="1dp" />
 
 </LinearLayout>

@@ -5,12 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".ProfileView">
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:orientation="vertical"-->
-<!--        android:padding="30dp">-->
-
     <ImageView
         android:id="@+id/pht"
         android:layout_width="300dp"
@@ -27,9 +21,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="150dp"
             android:transitionName="names"
-            android:text=""
+            android:text="@string/name"
             android:textColor="@color/copper"
             android:textSize="30sp"
             android:textStyle="bold"/>
