@@ -1,59 +1,86 @@
 package com.example.annpurna
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ReceiverFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ReceiverFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private lateinit var database: DatabaseReference
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var recieverAdapter: ReceiverAdapter
+    private var recieverList: ArrayList<ReceiverModel> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        database = FirebaseDatabase.getInstance().reference
+        fetchData()
+    }
+
+    private fun fetchData() {
+        val donationsRef = database.child("Donations")
+
+        // Attach a listener to read the data
+        donationsRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    // Parse the data
+                    for (userSnapshot in snapshot.children) {
+                        val user = userSnapshot.getValue(ReceiverModel::class.java)
+                        if (user != null) {
+                            recieverList.add(ReceiverModel("User: ${user.name}", "Age: ${user.description}"))
+                            recieverAdapter.notifyItemInserted(recieverList.size - 1)
+                        // Empty fields for the new form
+
+                            // Display fetched data
+//                            Toast.makeText(requireContext(), "User: ${user.name}, Age: ${user.description}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "No data available", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle error
+                Toast.makeText(requireContext(), "Failed to read value.", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_receiver, container, false)
-    }
+        val view = inflater.inflate(R.layout.fragment_receiver, container, false)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ReceiverFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ReceiverFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        recyclerView = view.findViewById(R.id.item_list)
+//        val name = view.findViewById<TextView>(R.id.name)
+//        val desc = view.findViewById<TextView>(R.id.name)
+//        addMoreButton = view.findViewById(R.id.addMore)
+//        donateButton = view.findViewById(R.id.donate)
+
+        // Set up RecyclerView
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recieverAdapter = ReceiverAdapter(recieverList)
+        recyclerView.adapter = recieverAdapter
+
+        recieverList.add(ReceiverModel("one", "two")) // Empty fields for the new form
+        recieverList.add(ReceiverModel("one", "two")) // Empty fields for the new form
+        recieverList.add(ReceiverModel("one", "two")) // Empty fields for the new form
+        recieverAdapter.notifyItemInserted(recieverList.size - 1)
+        Toast.makeText(requireContext(), "Accept", Toast.LENGTH_SHORT).show()
+
+
+
+        return view
     }
 }
