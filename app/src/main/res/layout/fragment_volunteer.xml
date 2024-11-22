@@ -54,6 +54,7 @@
         android:layout_marginTop="4dp" />
 
     <!-- Statistics Section -->
+
     <LinearLayout
         android:id="@+id/statistics"
         android:layout_width="match_parent"
@@ -66,6 +67,7 @@
         <!-- Portfolio Count -->
 
         <!-- Followers Count -->
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -81,20 +83,27 @@
 <!--                android:text="Followers"-->
 <!--                android:textSize="14sp"-->
 <!--                android:textColor="#777777"/>-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="394dp" />
         </LinearLayout>
 
         <!-- Following Count -->
     </LinearLayout>
 
     <!-- Edit and Share Buttons -->
+
+    <!-- About Me Section -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/statistics"
-        android:layout_marginTop="16dp"
+        android:layout_below="@+id/statistics"
+        android:layout_marginTop="78dp"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:padding="16dp"
-        android:gravity="center">
+        android:padding="16dp">
 
         <Button
             android:id="@+id/edit_button"
@@ -108,30 +117,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
+            android:layout_marginStart="16dp"
             android:backgroundTint="#3F51B5"
-            android:textColor="#FFFFFF"
-            android:layout_marginStart="16dp" />
+            android:textColor="#FFFFFF" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/myMaterialButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:elevation="7dp"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:elevation="7dp"
+            android:textColor="@color/white"
             app:backgroundTint="@color/copper"
             app:cornerRadius="70dp"
-            app:strokeColor="@color/black"
-            app:strokeWidth="10dp"
-            android:textColor="@color/white"
             app:icon="@drawable/pin"
             app:iconGravity="textStart"
             app:iconPadding="15dp"
-            app:iconSize="16dp" />
+            app:iconSize="16dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="10dp" />
 
     </LinearLayout>
 
-    <!-- About Me Section -->
     <TextView
         android:id="@+id/about_me_title"
         android:layout_width="wrap_content"

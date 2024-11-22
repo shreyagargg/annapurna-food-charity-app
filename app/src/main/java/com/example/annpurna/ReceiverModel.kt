@@ -17,7 +17,7 @@ RecyclerView.Adapter<ReceiverAdapter.RecieverViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecieverViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_card, parent, false)
+            .inflate(R.layout.item_receiver, parent, false)
         return RecieverViewHolder(view)
     }
 

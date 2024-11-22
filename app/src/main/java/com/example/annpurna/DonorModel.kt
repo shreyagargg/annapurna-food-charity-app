@@ -1,14 +1,9 @@
 package com.example.annpurna
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 
@@ -26,7 +21,7 @@ class DonorAdapter(private val donorList: ArrayList<DonorModel>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DonorViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item, parent, false)
+            .inflate(R.layout.item_donor, parent, false)
         return DonorViewHolder(view)
     }
 
