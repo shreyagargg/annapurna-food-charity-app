@@ -15,7 +15,6 @@
         android:padding="16dp"
         android:background="@drawable/card_bg">
 
-        <!-- Left Image -->
         <ImageView
             android:id="@+id/item_image"
             android:layout_width="80dp"
@@ -25,7 +24,6 @@
             android:scaleType="centerCrop"
             android:contentDescription="@string/item_image" />
 
-        <!-- Right Details -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -34,7 +32,6 @@
             android:layout_marginStart="16dp"
             android:gravity="center_vertical">
 
-            <!-- Item Name -->
             <TextView
                 android:id="@+id/src"
                 android:layout_width="wrap_content"
