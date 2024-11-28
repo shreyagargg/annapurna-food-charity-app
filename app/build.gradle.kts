@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    id("androidx.navigation.safeargs")
     kotlin("android") version "1.9.0"
     alias(libs.plugins.google.gms.google.services)
 }
@@ -59,9 +60,13 @@ dependencies {
     implementation(libs.firebase.storage.ktx)
     implementation(libs.firebase.storage)
     implementation(libs.androidx.cardview)
+    implementation(libs.androidx.navigation.fragment.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     implementation("com.airbnb.android:lottie:6.6.0")
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("com.google.android.gms:play-services-maps:19.0.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.2")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.2")
+
 }
