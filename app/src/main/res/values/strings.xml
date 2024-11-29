@@ -28,6 +28,8 @@
     <string name="tNc">I agree to the Terms and Conditions.</string>
     <string name="accept">Accept.</string>
     <string name="item">Item Name</string>
+    <string name="hist">History</string>
+    <string name="edit">edit</string>
 
 
     <string-array name="foodItems">

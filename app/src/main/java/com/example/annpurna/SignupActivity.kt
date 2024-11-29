@@ -32,6 +32,7 @@ class SignupActivity : AppCompatActivity() {
         val email = findViewById<EditText>(R.id.mail)
         val password = findViewById<EditText>(R.id.pass)
         val name = findViewById<EditText>(R.id.name)
+        val phn = findViewById<EditText>(R.id.phn)
 
         val signup = findViewById<Button>(R.id.sign)
         val bar = findViewById<ProgressBar>(R.id.bar)
@@ -43,6 +44,7 @@ class SignupActivity : AppCompatActivity() {
             val mail: String = email.text.toString().trim()
             val pass: String = password.text.toString().trim()
             val Name: String = name.text.toString().trim()
+            val phone: String = phn.text.toString().trim()
 
             if (TextUtils.isEmpty(mail)) {
                 email.error = "Required section"
@@ -58,7 +60,12 @@ class SignupActivity : AppCompatActivity() {
                 name.error = "Required section"
                 return@setOnClickListener
             }
-            saveData(Name)
+
+            if (TextUtils.isEmpty(phone)) {
+                phn.error = "Required section"
+                return@setOnClickListener
+            }
+            saveData(Name,mail,pass)
 
             bar.setVisibility(View.VISIBLE)
 
@@ -85,15 +92,12 @@ class SignupActivity : AppCompatActivity() {
 
         fun togglePasswordVisibility(isVisible: Boolean) {
             if (isVisible) {
-                // Show password
                 password.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
                 hide.text = "Hide Password"
             } else {
-                // Hide password
                 password.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
                 hide.text = "Show Password"
             }
-            // Move the cursor to the end of the text
             password.setSelection(password.text.length)
         }
 
@@ -102,10 +106,14 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveData(text: String) {
+    private fun saveData(mail: String, text2: String, text3: String) {
         val sharedPreferences: SharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.putString("savedText", text)
-        editor.apply()  // Apply the changes
+
+        editor.putString("savedText1", mail)
+        editor.putString("savedText2", text2)
+        editor.putString("savedText3", text3)
+
+        editor.apply()
     }
 }

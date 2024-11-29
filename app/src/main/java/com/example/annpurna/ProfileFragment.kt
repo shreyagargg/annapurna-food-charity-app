@@ -1,6 +1,8 @@
 package com.example.annpurna
 
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -49,16 +51,17 @@ class ProfileFragment : Fragment() {
         val contact = view.findViewById<TextView>(R.id.phn)
         val mail = view.findViewById<TextView>(R.id.mail)
         val code = view.findViewById<EditText>(R.id.pc)
-        val city = view.findViewById<TextView>(R.id.city)
+        val state = view.findViewById<TextView>(R.id.state)
         val address = view.findViewById<EditText>(R.id.address)
         val update = view.findViewById<Button>(R.id.update)
         val image = view.findViewById<ImageView>(R.id.profile)
+        val hist = view.findViewById<Button>(R.id.hist)
+        val edit = view.findViewById<Button>(R.id.edit)
+        val logoutButton = view.findViewById<Button>(R.id.logout)
+
+        loadData(name, contact, mail)
 
         image.setOnClickListener {
-            // Create a bundle for the fragment transition
-//            val bundle = Bundle()
-
-            // Create a FragmentTransaction with shared element
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
 
             // Specify the shared element transition
@@ -78,7 +81,7 @@ class ProfileFragment : Fragment() {
         }
 
 
-        update.setOnClickListener {
+        state.setOnClickListener {
             val pincode = code.text.toString().trim()
 
             if (pincode.isNotEmpty()) {
@@ -86,23 +89,36 @@ class ProfileFragment : Fragment() {
                 Toast.makeText(context,"$location", Toast.LENGTH_SHORT).show()
 
                 if (location != null) {
-                    city.text = "${location.state} / ${location.location}"
+                    state.text = "${location.state}"
                 } else {
-                    city.text = "Not Found"
+                    state.text = "Not Found"
                 }
             } else {
-                city.text = "Please enter a valid pincode."
+                state.text = "Please enter a valid pincode."
             }
+        }
+
+        logoutButton.setOnClickListener {
+            val intent = Intent(requireActivity(), LoginActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
         }
 
 
         return view
     }
 
+    private fun loadData(name: TextView, contact: TextView, mail: TextView) {
+        val sharedPreferences: SharedPreferences = requireActivity().getSharedPreferences("MyPrefs", MODE_PRIVATE)
 
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                }
-            }
+        val savedName = sharedPreferences.getString("savedText1", "Default Name")
+        val savedContact = sharedPreferences.getString("savedText2", "Default Contact")
+        val savedMail = sharedPreferences.getString("savedText3", "Default Email")
+
+        name.text = savedName
+        contact.text = savedContact
+        mail.text = savedMail
     }
+
+
+}
