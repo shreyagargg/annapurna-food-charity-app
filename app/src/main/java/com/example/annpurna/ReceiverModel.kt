@@ -14,7 +14,7 @@ data class ReceiverModel(
     var date: String = ""
 )
 
-class ReceiverAdapter(private val receiverList: ArrayList<ReceiverModel>, param: (Any) -> Unit) :
+class ReceiverAdapter(private val receiverList: ArrayList<ReceiverModel>) :
 RecyclerView.Adapter<ReceiverAdapter.RecieverViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecieverViewHolder {
@@ -37,26 +37,7 @@ RecyclerView.Adapter<ReceiverAdapter.RecieverViewHolder>() {
                 putString("expiryDate", receiver.date)
             }
 
-            // Navigate to PopupModelFragment
-            view.findNavController().navigate(R.id.popupModelFragment, bundle)
-
         }
-//        holder.expEditText.setText(donor.date)
-//        holder.quantityEditText.setText(donor.quantity)
-
-        // Add TextChangedListeners to update donor object when the user types something
-//        holder.itemname.addTextChangedListener { text ->
-//            reciever.name = text.toString()
-//        }
-//        holder.desc.addTextChangedListener { text ->
-//            reciever.description = text.toString()
-//        }
-//        holder.expEditText.addTextChangedListener { text ->
-//            donor.date = text.toString()
-//        }
-//        holder.quantityEditText.addTextChangedListener { text ->
-//            donor.quantity = text.toString()
-//        }
     }
 
     override fun getItemCount(): Int {
@@ -66,37 +47,5 @@ RecyclerView.Adapter<ReceiverAdapter.RecieverViewHolder>() {
     inner class RecieverViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val itemname: TextView = view.findViewById(R.id.item_name)
         val desc: TextView = view.findViewById(R.id.item_details)
-//        val expEditText: EditText = view.findViewById(R.id.exp)
-//        val quantityEditText: EditText = view.findViewById(R.id.quantity)
     }
 }
-
-
-//class ItemAdapter(
-//    private val itemList: List<Item>,
-//    private val onItemClicked: (Item) -> Unit // Pass item details to callback
-//) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
-//
-//    class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        val itemName: TextView = itemView.findViewById(R.id.item_name)
-//        // Add more views as needed
-//    }
-//
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-//        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
-//        return ItemViewHolder(view)
-//    }
-
-//    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-//        val item = itemList[position]
-//        holder.itemName.text = item.name
-//        // Bind other data as needed
-//
-//        // Set click listener
-//        holder.itemView.setOnClickListener {
-//            onItemClicked(item) // Trigger the callback
-//        }
-//    }
-
-//    override fun getItemCount(): Int = itemList.size
-//}

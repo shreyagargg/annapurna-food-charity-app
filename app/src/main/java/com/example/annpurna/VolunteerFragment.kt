@@ -40,7 +40,7 @@ class VolunteerFragment : Fragment() {
                     for (userSnapshot in snapshot.children) {
                         val user = userSnapshot.getValue(ReceiverModel::class.java)
                         if (user != null) {
-                            volunteerList.add(VolunteerModel("User: ${user.name}", "Age: ${user.description}"))
+                            volunteerList.add(VolunteerModel("User: ${user.foodItem}", "Age: ${user.foodItem}"))
                             volAdapter.notifyItemInserted(volunteerList.size - 1)
                             // Empty fields for the new form
 
