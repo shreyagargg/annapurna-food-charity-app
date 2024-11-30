@@ -30,6 +30,8 @@
     <string name="item">Item Name</string>
     <string name="hist">History</string>
     <string name="edit">edit</string>
+    <string name="default_web_client_id">AIzaSyDYKRL1VkbT_6MXaUDFeANnP0qIr2P9VaM</string>
+
 
 
     <string-array name="foodItems">

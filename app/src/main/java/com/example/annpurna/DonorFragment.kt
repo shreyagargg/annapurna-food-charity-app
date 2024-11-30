@@ -1,5 +1,7 @@
 package com.example.annpurna
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
@@ -26,6 +29,7 @@ class DonorFragment : Fragment() {
 
     private lateinit var addMoreButton: Button
     private lateinit var donateButton: Button
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +50,9 @@ class DonorFragment : Fragment() {
         addMoreButton = view.findViewById(R.id.addMore)
         donateButton = view.findViewById(R.id.donate)
 
+        // Initialize SharedPreferences for local storage
+        sharedPreferences = requireContext().getSharedPreferences("UserDetails", Context.MODE_PRIVATE)
+
         // Set up RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(activity)
         donorAdapter = DonorAdapter(donorList)
@@ -61,7 +68,7 @@ class DonorFragment : Fragment() {
 
         // Donate button click listener (to save data in Firebase)
         donateButton.setOnClickListener {
-            saveAllData()
+            checkUserAddressAndSaveData()
         }
 
         return view
@@ -71,8 +78,47 @@ class DonorFragment : Fragment() {
         // Add a new empty form to the donor list
         donorList.add(DonorModel("", "", "", "kg", "")) // Empty fields for the new form
         donorAdapter.notifyItemInserted(donorList.size - 1)
-        Toast.makeText(requireContext(), "new view", Toast.LENGTH_SHORT).show()
+    }
 
+    private fun checkUserAddressAndSaveData() {
+        // Retrieve user address info from local storage
+        val userAddress = sharedPreferences.getString("address", null)
+        val userCity = sharedPreferences.getString("city", null)
+
+        // If address info is not available in local storage, check Firebase
+        if (userAddress == null || userCity == null) {
+            // Check if user address info exists in Firebase
+            val userId = FirebaseAuth.getInstance().currentUser?.uid
+            if (userId != null) {
+                database.child("user_info").child(userId).get().addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val userInfo = task.result
+                        val firebaseAddress = userInfo?.child("address")?.value as? String
+                        val firebaseCity = userInfo?.child("city")?.value as? String
+
+                        if (firebaseAddress.isNullOrEmpty() || firebaseCity.isNullOrEmpty()) {
+                            // If the address or city is missing, send to ProfileFragment
+                            Toast.makeText(requireContext(), "Please update your profile", Toast.LENGTH_SHORT).show()
+                            // Redirect to profile fragment
+                            activity?.supportFragmentManager?.beginTransaction()
+                                ?.replace(R.id.frame, ProfileFragment())
+                                ?.addToBackStack(null)
+                                ?.commit()
+                        } else {
+                            // Address and city are available, save donation data
+                            saveAllData()
+                        }
+                    } else {
+                        Toast.makeText(requireContext(), "Failed to fetch user info", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } else {
+                Toast.makeText(requireContext(), "User not authenticated", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            // Address info available locally, save donation data
+            saveAllData()
+        }
     }
 
     private fun saveAllData() {
@@ -80,10 +126,9 @@ class DonorFragment : Fragment() {
             if (donor.name.isNotBlank() && donor.description.isNotBlank() &&
                 donor.date.isNotBlank() && donor.quantity.isNotBlank()) {
                 saveData(donor)
-            }
-            else
+            } else {
                 Toast.makeText(requireContext(), "Mark entries first", Toast.LENGTH_SHORT).show()
-
+            }
         }
     }
 
@@ -102,12 +147,11 @@ class DonorFragment : Fragment() {
         database.child("Donations").child(donationId).setValue(donationData)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(requireContext(), "Successfull to save data", Toast.LENGTH_SHORT).show()
-
-                    // Uncomment if you want to upload an image with the donation
-//                     uploadImage(donationId)
+                    Toast.makeText(requireContext(), "Donation data saved successfully", Toast.LENGTH_SHORT).show()
+                    // Optionally upload an image with the donation
+                    uploadImage(donationId)
                 } else {
-                    Toast.makeText(requireContext(), "Failed to save data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Failed to save donation data", Toast.LENGTH_SHORT).show()
                 }
             }
     }

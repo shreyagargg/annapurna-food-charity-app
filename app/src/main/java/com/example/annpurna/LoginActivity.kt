@@ -88,11 +88,11 @@ class LoginActivity : AppCompatActivity() {
 
         forgetPass.setOnClickListener{
             val mail: String = email.text.toString().trim()
-                if (mail.isNotEmpty()) {
-                    resetPassword(mail)
-                } else {
-                    Toast.makeText(this,"Please enter your email.", Toast.LENGTH_SHORT).show()
-                }
+            if (mail.isNotEmpty()) {
+                resetPassword(mail)
+            } else {
+                Toast.makeText(this,"Please enter your email.", Toast.LENGTH_SHORT).show()
+            }
         }
 
         fun togglePasswordVisibility(isVisible: Boolean) {

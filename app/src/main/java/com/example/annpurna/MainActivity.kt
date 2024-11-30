@@ -9,13 +9,24 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        // Initialize Firebase Auth and Database
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance().reference
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -25,12 +36,12 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val frameLayout = findViewById<FrameLayout>(R.id.frame)
 
+        // Initial fragment load
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.frame, DonorFragment())
-                .commit()
+            checkUserDetailsAndLoadFragment()
         }
 
+        // Bottom navigation item selection listener
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.donate -> {
@@ -62,5 +73,24 @@ class MainActivity : AppCompatActivity() {
         val savedText = sharedPreferences.getString("savedText", "data")
         data.text = "Hello $savedText"
     }
-}
 
+    private fun checkUserDetailsAndLoadFragment() {
+        val userId = auth.currentUser?.uid
+        if (userId != null) {
+            // Check the user details in Firebase
+            database.child("user_info").child(userId).get().addOnSuccessListener { snapshot ->
+                val user = snapshot.getValue(User::class.java)
+                if (user == null || user.address == null || user.pincode == null || user.state == null || user.city == null) {
+                    // Redirect to ProfileFragment if address details are missing
+                    supportFragmentManager.beginTransaction().replace(R.id.frame, ProfileFragment()).commit()
+                } else {
+                    // Otherwise, proceed with the DonorFragment
+                    supportFragmentManager.beginTransaction().replace(R.id.frame, DonorFragment()).commit()
+                }
+            }.addOnFailureListener {
+                // Handle failure (e.g., network error)
+                supportFragmentManager.beginTransaction().replace(R.id.frame, ProfileFragment()).commit()
+            }
+        }
+    }
+}
