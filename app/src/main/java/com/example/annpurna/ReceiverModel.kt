@@ -7,45 +7,53 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import java.io.Serializable
 
-
+// Receiver Model
 data class ReceiverModel(
-    var foodItem: String = "",
-    var date: String = ""
-)
+    var foodItem: String = "",          // Name of the food item
+    var expiryDate: String = "",             // Expiry date of the item
+    var quantity: String = "",         // Quantity of the item
+    var quantityType: String = "",     // Type of quantity (e.g., kg, litres, pieces)
+    var description: String = "",      // Additional description of the food
+    var Dname: String = "",        // Name of the donor
+    var Dcontact: String = "",     // Contact details of the donor
+    var city: String = "",             // City for filtering by location
+    var accepted: Int = 0              // Status: 0 = not accepted, 1 = taken, -1 = expired
+) : Serializable
 
-class ReceiverAdapter(private val receiverList: ArrayList<ReceiverModel>) :
-RecyclerView.Adapter<ReceiverAdapter.RecieverViewHolder>() {
+// Receiver Adapter
+class ReceiverAdapter(
+    private val receiverList: ArrayList<ReceiverModel>,
+    private val onItemClicked: (ReceiverModel) -> Unit
+) : RecyclerView.Adapter<ReceiverAdapter.ReceiverViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecieverViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReceiverViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_receiver, parent, false)
-        return RecieverViewHolder(view)
+        return ReceiverViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: RecieverViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ReceiverViewHolder, position: Int) {
         val receiver = receiverList[position]
 
         // Set the data into the UI components
-        holder.itemname.setText(receiver.foodItem)
-        holder.desc.setText(receiver.date)
+        holder.itemName.text = receiver.foodItem
+        holder.itemDetails.text = """
+            Expiry Date: ${receiver.expiryDate}
+            Quantity: ${receiver.quantity} ${receiver.quantityType}
+        """.trimIndent()
 
         holder.itemView.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "Clicked:}", Toast.LENGTH_SHORT).show()
-            val bundle = Bundle().apply {
-                putString("foodItem", receiver.foodItem)
-                putString("expiryDate", receiver.date)
-            }
-
+            onItemClicked(receiver) // Trigger the click listener
         }
     }
 
-    override fun getItemCount(): Int {
-        return receiverList.size
-    }
+    override fun getItemCount(): Int = receiverList.size
 
-    inner class RecieverViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val itemname: TextView = view.findViewById(R.id.item_name)
-        val desc: TextView = view.findViewById(R.id.item_details)
+    // ViewHolder for Receiver Items
+    inner class ReceiverViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val itemName: TextView = view.findViewById(R.id.item_name)
+        val itemDetails: TextView = view.findViewById(R.id.item_details)
     }
 }

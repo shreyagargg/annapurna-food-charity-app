@@ -9,14 +9,15 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
+import org.json.JSONObject
+import java.io.File
 
 class ReceiverFragment : Fragment() {
 
     private lateinit var database: DatabaseReference
-
     private lateinit var recyclerView: RecyclerView
-    private lateinit var recieverAdapter: ReceiverAdapter
-    private var recieverList: ArrayList<ReceiverModel> = ArrayList()
+    private lateinit var receiverAdapter: ReceiverAdapter
+    private var receiverList: ArrayList<ReceiverModel> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,32 +27,49 @@ class ReceiverFragment : Fragment() {
 
     private fun fetchData() {
         val donationsRef = database.child("Donations")
+        val userFile = File(requireContext().filesDir, "user_data.json")
+        var currentUser: JSONObject? = null
+
+        if (userFile.exists()) {
+            currentUser = JSONObject(userFile.readText())
+        }
 
         donationsRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                receiverList.clear()
                 if (snapshot.exists()) {
-                    // Parse the data
-                    for (userSnapshot in snapshot.children) {
-                        val user = userSnapshot.getValue(ReceiverModel::class.java)
-                        if (user != null) {
-                            recieverList.add(ReceiverModel("Item: ${user.foodItem}", "Expiry Date: ${user.date}"))
-                            recieverAdapter.notifyItemInserted(recieverList.size - 1)
-                        // Empty fields for the new form
+                    for (donationSnapshot in snapshot.children) {
+                        val donation = donationSnapshot.getValue(ReceiverModel::class.java)
+                        if (donation != null) {
+                            val accepted = donation.accepted
+                            val donorName = donation.Dname
+                            val donorContact = donation.Dcontact
 
-                            // Display fetched data
-//                            Toast.makeText(requireContext(), "User: ${user.name}, Age: ${user.description}", Toast.LENGTH_SHORT).show()
+                            // Conditions: Skip items if Accepted = 1/-1 or user is the donor
+                            if (accepted != 1 && accepted != -1) {
+                                if (currentUser == null ||
+                                    donorName != currentUser.optString("name") ||
+                                    donorContact != currentUser.optString("contactNumber")
+                                ) {
+                                    receiverList.add(donation)
+                                }
+                            }
                         }
                     }
+                    receiverAdapter.notifyDataSetChanged()
                 } else {
                     Toast.makeText(requireContext(), "No data available", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Handle error
-                Toast.makeText(requireContext(), "Failed to read value.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Failed to read data.", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+    fun refreshReceiverList() {
+        // Refresh the list after an item is accepted
+        fetchData() // You can also implement specific logic to just remove the accepted item
     }
 
     override fun onCreateView(
@@ -62,14 +80,16 @@ class ReceiverFragment : Fragment() {
 
         recyclerView = view.findViewById(R.id.item_list)
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        recieverAdapter = ReceiverAdapter(recieverList)
-        recyclerView.adapter = recieverAdapter
-
-        recieverAdapter.notifyItemInserted(recieverList.size - 1)
-        Toast.makeText(requireContext(), "Clicked:", Toast.LENGTH_SHORT).show()
-
-
+        receiverAdapter = ReceiverAdapter(receiverList) { donation ->
+            openPopup(donation)
+        }
+        recyclerView.adapter = receiverAdapter
 
         return view
+    }
+
+    private fun openPopup(donation: ReceiverModel) {
+        val popupFragment = ReceiverPopupFragment.newInstance(donation)
+        popupFragment.show(childFragmentManager, "ReceiverPopupFragment")
     }
 }
