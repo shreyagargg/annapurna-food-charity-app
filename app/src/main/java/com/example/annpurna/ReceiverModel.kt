@@ -22,7 +22,7 @@ data class ReceiverModel(
     var city: String = "",             // City for filtering by location
     var accepted: Int = 0,             // Status: 0 = not accepted, 1 = taken, -1 = expired
     var Rname: String = "",            // Name of the receiver (new field)
-    var Rcontact: String = ""          // Contact details of the receiver (new field)
+    var Rcontact: String = "", // Contact details of the receiver (new field)
 ) : Serializable
 
 

@@ -76,19 +76,21 @@ class ReceiverPopupFragment : DialogFragment() {
         // Initialize Firebase reference
         database = FirebaseDatabase.getInstance().reference
 
-        // Retrieve the current user's details (rname and rcontact) from local JSON file
+        // Retrieve the current user's details (rname, rcontact, and raddress) from local JSON file
         val userFile = File(requireContext().filesDir, "user_data.json")
         var currentUser: JSONObject? = null
         var rname = ""
         var rcontact = ""
+        var raddress = ""
 
         if (userFile.exists()) {
             currentUser = JSONObject(userFile.readText())
             rname = currentUser.optString("name")  // Retrieve receiver's name
             rcontact = currentUser.optString("contactNumber")  // Retrieve receiver's contact number
+            raddress = currentUser.optString("address")  // Retrieve receiver's address
         }
 
-        // Update the Accepted field and add receiver's name and contact details
+        // Update the Accepted field and add receiver's name, contact details, and address
         val donationRef = database.child("Donations").orderByChild("foodItem")
             .equalTo(donation.foodItem) // You can change this query to a more suitable one, like using a unique ID
 
@@ -100,7 +102,8 @@ class ReceiverPopupFragment : DialogFragment() {
                     val donationUpdates = mapOf(
                         "accepted" to 1,
                         "rname" to rname,  // Set receiver's name
-                        "rcontact" to rcontact  // Set receiver's contact number
+                        "rcontact" to rcontact,  // Set receiver's contact number
+                        "raddress" to raddress  // Set receiver's address
                     )
 
                     database.child("Donations").child(donationKey).updateChildren(donationUpdates)

@@ -74,10 +74,11 @@ class DonorFragment : Fragment() {
             val name = userData.optString("name", null)
             val contactNumber = userData.optString("contactNumber", null)
             val city = userData.optString("city", null)
+            val address = userData.optString("address", null)
 
-            if (name != null && contactNumber != null && city != null) {
+            if (name != null && contactNumber != null && city != null && address != null) {
                 // Save donations using local data
-                saveDonations(name, contactNumber, city)
+                saveDonations(name, contactNumber, city, address)
             } else {
                 // Fetch data from Firebase if local storage is incomplete
                 fetchDetailsFromFirebaseAndSave()
@@ -97,10 +98,11 @@ class DonorFragment : Fragment() {
                     val name = userInfo?.child("name")?.value as? String
                     val contactNumber = userInfo?.child("contactNumber")?.value as? String
                     val city = userInfo?.child("city")?.value as? String
+                    val address = userInfo?.child("address")?.value as? String
 
-                    if (!name.isNullOrEmpty() && !contactNumber.isNullOrEmpty() && !city.isNullOrEmpty()) {
+                    if (!name.isNullOrEmpty() && !contactNumber.isNullOrEmpty() && !city.isNullOrEmpty() && !address.isNullOrEmpty()) {
                         // Save donations using Firebase data
-                        saveDonations(name, contactNumber, city)
+                        saveDonations(name, contactNumber, city, address)
                     } else {
                         // Redirect to ProfileFragment if data is incomplete
                         Toast.makeText(requireContext(), "Please update your profile", Toast.LENGTH_SHORT).show()
@@ -118,7 +120,7 @@ class DonorFragment : Fragment() {
         }
     }
 
-    private fun saveDonations(donorName: String, donorContact: String, donorCity: String) {
+    private fun saveDonations(donorName: String, donorContact: String, donorCity: String, donorAddress: String) {
         var allValid = true
         var uploadedCount = 0
 
@@ -127,7 +129,7 @@ class DonorFragment : Fragment() {
                 donor.date.isNotBlank() && donor.quantity.isNotBlank()
             ) {
                 uploadedCount++
-                saveDonationToFirebase(donor, donorName, donorContact, donorCity) {
+                saveDonationToFirebase(donor, donorName, donorContact, donorCity, donorAddress) {
                     uploadedCount--
                     if (uploadedCount == 0) resetDonorFragment()
                 }
@@ -146,6 +148,7 @@ class DonorFragment : Fragment() {
         donorName: String,
         donorContact: String,
         donorCity: String,
+        donorAddress: String,
         onComplete: () -> Unit
     ) {
         val donationId = database.child("Donations").push().key ?: return
@@ -153,6 +156,7 @@ class DonorFragment : Fragment() {
             Dname = donorName,
             Dcontact = donorContact,
             Dcity = donorCity,
+            Daddress = donorAddress,
             foodItem = donor.name,
             description = donor.description,
             expiryDate = donor.date,

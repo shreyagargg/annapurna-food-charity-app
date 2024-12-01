@@ -6,7 +6,7 @@ data class User(
     val email: String,
     val contactNumber: String,
     val password: String,
-    val address: String? = null, // Optional address field
+    val address: String? = null,
     val pincode: String? = null,
     val state: String? = null,
     val city: String? = null

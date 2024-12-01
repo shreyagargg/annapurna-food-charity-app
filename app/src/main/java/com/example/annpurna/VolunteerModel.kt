@@ -1,49 +1,74 @@
 package com.example.annpurna
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-
+import android.os.Parcel
+import android.os.Parcelable
 
 data class VolunteerModel(
-    var donorName: String = "",
-    var donorContact: String = "",
-    var sourceAddress: String = "",
-    var receiverName: String = "",
-    var receiverContact: String = "",
-    var destinationAddress: String = ""
-)
+    var Dname: String = "",         // Donor name
+    var Dcontact: String = "",      // Donor contact
+    var Saddress: String? = "",     // Source address (Donor's address)
+    var Rname: String = "",         // Receiver name
+    var Rcontact: String = "",      // Receiver contact
+    var Daddress: String? = "",     // Destination address (Receiver's address)
+    var Delivered: String? = "",    // Delivery status (0 = not delivered, 1 = delivered)
+    var expiryDate: String = "",    // Expiry date of the food item
+    var quantityType: String = "",  // Type of quantity (kg, liters, etc.)
+    var perishable: String = "",    // Perishable status (Yes/No)
+    var quantity: String = "",      // Quantity of the food item
+    var foodItem: String = "",      // Name of the food item
+    var accepted: Int? = 0,         // Accepted status (-1 = expired, 0 = not taken, 1 = taken)
+    var description: String = "",   // Short description of the food item
+    var dcity: String = "",         // Donor's city
+    var Raddress: String? = ""      // Receiver address (new field for destination)
+) : Parcelable {
 
+    private constructor(parcel: Parcel) : this(
+        Dname = parcel.readString() ?: "",
+        Dcontact = parcel.readString() ?: "",
+        Saddress = parcel.readString() ?: "",
+        Rname = parcel.readString() ?: "",
+        Rcontact = parcel.readString() ?: "",
+        Daddress = parcel.readString() ?: "",
+        Delivered = parcel.readString() ?: "",
+        expiryDate = parcel.readString() ?: "",
+        quantityType = parcel.readString() ?: "",
+        perishable = parcel.readString() ?: "",
+        quantity = parcel.readString() ?: "",
+        foodItem = parcel.readString() ?: "",
+        accepted = parcel.readInt(),
+        description = parcel.readString() ?: "",
+        dcity = parcel.readString() ?: "",
+        Raddress = parcel.readString() ?: ""
+    )
 
-class VolunteerAdapter(private val volunteerList: ArrayList<VolunteerModel>) :
-    RecyclerView.Adapter<VolunteerAdapter.VolunteerViewHolder>() {
-
-    // Create view holder for each item
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VolunteerViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_vol, parent, false) // Layout for individual item
-        return VolunteerViewHolder(view)
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(Dname)
+        parcel.writeString(Dcontact)
+        parcel.writeString(Saddress)
+        parcel.writeString(Rname)
+        parcel.writeString(Rcontact)
+        parcel.writeString(Daddress)
+        parcel.writeString(Delivered)
+        parcel.writeString(expiryDate)
+        parcel.writeString(quantityType)
+        parcel.writeString(perishable)
+        parcel.writeString(quantity)
+        parcel.writeString(foodItem)
+        accepted?.let { parcel.writeInt(it) }
+        parcel.writeString(description)
+        parcel.writeString(dcity)
+        parcel.writeString(Raddress)
     }
 
-    // Bind data to the ViewHolder (each RecyclerView item)
-    override fun onBindViewHolder(holder: VolunteerViewHolder, position: Int) {
-        val volunteer = volunteerList[position]
+    override fun describeContents(): Int = 0
 
-        // Set the source and destination addresses in the corresponding TextViews
-        holder.source.text = volunteer.sourceAddress
-        holder.dest.text = volunteer.destinationAddress
-    }
+    companion object CREATOR : Parcelable.Creator<VolunteerModel> {
+        override fun createFromParcel(parcel: Parcel): VolunteerModel {
+            return VolunteerModel(parcel)
+        }
 
-    // Return the total number of items
-    override fun getItemCount(): Int {
-        return volunteerList.size
-    }
-
-    // ViewHolder to hold references to the TextViews for each item
-    inner class VolunteerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val source: TextView = view.findViewById(R.id.src)    // Source address TextView
-        val dest: TextView = view.findViewById(R.id.dest)      // Destination address TextView
+        override fun newArray(size: Int): Array<VolunteerModel?> {
+            return arrayOfNulls(size)
+        }
     }
 }
