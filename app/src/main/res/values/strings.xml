@@ -129,6 +129,9 @@ Email: abc@abc.com
 Phone: 7712366549
 </string>
     <string name="toBeImple">\tOops\nThis feature is in progress</string>
+    <string name="destination_address">Destination address:</string>
+    <string name="deliver">Deliver</string>
+    <string name="source_address">Source Adress:</string>
 
 
 </resources>

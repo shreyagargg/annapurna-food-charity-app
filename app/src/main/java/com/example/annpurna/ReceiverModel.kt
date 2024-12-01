@@ -10,17 +10,21 @@ import androidx.recyclerview.widget.RecyclerView
 import java.io.Serializable
 
 // Receiver Model
+// Receiver Model
 data class ReceiverModel(
     var foodItem: String = "",          // Name of the food item
-    var expiryDate: String = "",             // Expiry date of the item
+    var expiryDate: String = "",       // Expiry date of the item
     var quantity: String = "",         // Quantity of the item
     var quantityType: String = "",     // Type of quantity (e.g., kg, litres, pieces)
     var description: String = "",      // Additional description of the food
-    var Dname: String = "",        // Name of the donor
-    var Dcontact: String = "",     // Contact details of the donor
+    var Dname: String = "",            // Name of the donor
+    var Dcontact: String = "",         // Contact details of the donor
     var city: String = "",             // City for filtering by location
-    var accepted: Int = 0              // Status: 0 = not accepted, 1 = taken, -1 = expired
+    var accepted: Int = 0,             // Status: 0 = not accepted, 1 = taken, -1 = expired
+    var Rname: String = "",            // Name of the receiver (new field)
+    var Rcontact: String = ""          // Contact details of the receiver (new field)
 ) : Serializable
+
 
 // Receiver Adapter
 class ReceiverAdapter(

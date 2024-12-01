@@ -1,11 +1,10 @@
 package com.example.annpurna
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
@@ -16,81 +15,110 @@ import com.google.firebase.database.ValueEventListener
 
 class VolunteerFragment : Fragment() {
 
-    private lateinit var database: DatabaseReference
-
     private lateinit var recyclerView: RecyclerView
-    private lateinit var volAdapter: VolunteerAdapter
-    private var volunteerList: ArrayList<VolunteerModel> = ArrayList()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        database = FirebaseDatabase.getInstance().reference
-        fetchData()
-    }
-
-
-    private fun fetchData() {
-        val donationsRef = database.child("Donations")
-
-        // Attach a listener to read the data
-        donationsRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    // Parse the data
-                    for (userSnapshot in snapshot.children) {
-                        val user = userSnapshot.getValue(ReceiverModel::class.java)
-                        if (user != null) {
-                            volunteerList.add(VolunteerModel("User: ${user.foodItem}", "Age: ${user.foodItem}"))
-                            volAdapter.notifyItemInserted(volunteerList.size - 1)
-                            // Empty fields for the new form
-
-                            // Display fetched data
-//                            Toast.makeText(requireContext(), "User: ${user.name}, Age: ${user.description}", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                } else {
-                    Toast.makeText(requireContext(), "No data available", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Handle error
-                Toast.makeText(requireContext(), "Failed to read value.", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
-
-
+    private lateinit var volunteerList: ArrayList<VolunteerModel>
+    private lateinit var volunteerAdapter: VolunteerAdapter
+    private lateinit var databaseReference: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_receiver, container, false)
+        // Inflate the layout for this fragment
+        val binding = inflater.inflate(R.layout.fragment_volunteer, container, false)
 
-        recyclerView = view.findViewById(R.id.item_list)
-//        val name = view.findViewById<TextView>(R.id.name)
-//        val desc = view.findViewById<TextView>(R.id.name)
-//        addMoreButton = view.findViewById(R.id.addMore)
-//        donateButton = view.findViewById(R.id.donate)
+        // Initialize RecyclerView
+        recyclerView = binding.findViewById(R.id.recycler_view)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        volunteerList = ArrayList()
+        volunteerAdapter = VolunteerAdapter(volunteerList)
+        recyclerView.adapter = volunteerAdapter
 
-        // Set up RecyclerView
-        recyclerView.layoutManager = LinearLayoutManager(activity)
-        volAdapter = VolunteerAdapter(volunteerList)
-        recyclerView.adapter = volAdapter
+        // Initialize Firebase Database reference
+        databaseReference = FirebaseDatabase.getInstance().reference
 
-        volunteerList.add(VolunteerModel("one", "two"))
-        volunteerList.add(VolunteerModel("one", "two"))
-        volunteerList.add(VolunteerModel("one", "two")) // Empty fields for the new form
-//        recieverList.add(ReceiverModel("one", "two")) // Empty fields for the new form
-//        recieverList.add(ReceiverModel("one", "two")) // Empty fields for the new form
-        volAdapter.notifyItemInserted(volunteerList.size - 1)
-        Toast.makeText(requireContext(), "Accept", Toast.LENGTH_SHORT).show()
+        // Fetch the data
+        fetchVolunteerData()
 
-
-
-        return view
+        return binding
     }
 
+    private fun fetchVolunteerData() {
+        // Fetch donations that need to be delivered (status: Delivered = 0)
+        databaseReference.child("Donations").orderByChild("Delivered").equalTo("0")
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (donationSnapshot in snapshot.children) {
+                        // Get donor and receiver details from the transaction
+                        val donorName = donationSnapshot.child("Dname").value.toString()
+                        val donorContact = donationSnapshot.child("DContact").value.toString()
+                        val receiverName = donationSnapshot.child("Rname").value.toString()
+                        val receiverContact = donationSnapshot.child("Rcontact").value.toString()
 
+                        // Fetch source address for donor from user_info database
+                        fetchSourceAddress(donorName, donorContact, receiverName, receiverContact)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Handle possible errors here
+                }
+            })
+    }
+
+    private fun fetchSourceAddress(
+        donorName: String, donorContact: String, receiverName: String, receiverContact: String
+    ) {
+        // Fetch source address from user_info database using donor's name and contact
+        databaseReference.child("user_info").orderByChild("username")
+            .equalTo(donorName).addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        // Assuming there is a matching entry for the donor
+                        val donorData = snapshot.children.first()
+                        val sourceAddress = donorData.child("address").value.toString()
+
+                        // Fetch destination address from user_info using receiver's name and contact
+                        fetchDestinationAddress(receiverName, receiverContact, sourceAddress)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Handle possible errors here
+                }
+            })
+    }
+
+    private fun fetchDestinationAddress(
+        receiverName: String, receiverContact: String, sourceAddress: String
+    ) {
+        // Fetch destination address from user_info database using receiver's name and contact
+        databaseReference.child("user_info").orderByChild("username")
+            .equalTo(receiverName).addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        // Assuming there is a matching entry for the receiver
+                        val receiverData = snapshot.children.first()
+                        val destinationAddress = receiverData.child("address").value.toString()
+
+                        // Now add the data to the volunteer list
+                        val volunteer = VolunteerModel(
+                            donorName = receiverName,
+                            donorContact = receiverContact,
+                            sourceAddress = sourceAddress,
+                            receiverName = receiverName,
+                            receiverContact = receiverContact,
+                            destinationAddress = destinationAddress
+                        )
+
+                        volunteerList.add(volunteer)
+                        volunteerAdapter.notifyDataSetChanged() // Notify adapter for changes
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Handle possible errors here
+                }
+            })
+    }
 }

@@ -44,6 +44,8 @@ class ReceiverFragment : Fragment() {
                             val accepted = donation.accepted
                             val donorName = donation.Dname
                             val donorContact = donation.Dcontact
+                            val receiverName = donation.Rname // New field for receiver name
+                            val receiverContact = donation.Rcontact // New field for receiver contact
 
                             // Conditions: Skip items if Accepted = 1/-1 or user is the donor
                             if (accepted != 1 && accepted != -1) {
@@ -51,6 +53,9 @@ class ReceiverFragment : Fragment() {
                                     donorName != currentUser.optString("name") ||
                                     donorContact != currentUser.optString("contactNumber")
                                 ) {
+                                    // Now you can add donation with receiver info
+                                    donation.Rname = receiverName // Set receiver name
+                                    donation.Rcontact = receiverContact // Set receiver contact
                                     receiverList.add(donation)
                                 }
                             }
@@ -67,6 +72,7 @@ class ReceiverFragment : Fragment() {
             }
         })
     }
+
     fun refreshReceiverList() {
         // Refresh the list after an item is accepted
         fetchData() // You can also implement specific logic to just remove the accepted item

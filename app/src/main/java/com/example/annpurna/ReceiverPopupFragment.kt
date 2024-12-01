@@ -10,6 +10,8 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import org.json.JSONObject
+import java.io.File
 
 class ReceiverPopupFragment : DialogFragment() {
 
@@ -74,16 +76,34 @@ class ReceiverPopupFragment : DialogFragment() {
         // Initialize Firebase reference
         database = FirebaseDatabase.getInstance().reference
 
-        // Update the Accepted field to 1 in the database
+        // Retrieve the current user's details (rname and rcontact) from local JSON file
+        val userFile = File(requireContext().filesDir, "user_data.json")
+        var currentUser: JSONObject? = null
+        var rname = ""
+        var rcontact = ""
+
+        if (userFile.exists()) {
+            currentUser = JSONObject(userFile.readText())
+            rname = currentUser.optString("name")  // Retrieve receiver's name
+            rcontact = currentUser.optString("contactNumber")  // Retrieve receiver's contact number
+        }
+
+        // Update the Accepted field and add receiver's name and contact details
         val donationRef = database.child("Donations").orderByChild("foodItem")
             .equalTo(donation.foodItem) // You can change this query to a more suitable one, like using a unique ID
 
         donationRef.get().addOnSuccessListener { snapshot ->
-            snapshot.children.forEach {
-                val donationKey = it.key
+            snapshot.children.forEach { donationSnapshot ->
+                val donationKey = donationSnapshot.key
                 if (donationKey != null) {
                     // Update the donation's accepted status to 1
-                    database.child("Donations").child(donationKey).child("accepted").setValue(1)
+                    val donationUpdates = mapOf(
+                        "accepted" to 1,
+                        "rname" to rname,  // Set receiver's name
+                        "rcontact" to rcontact  // Set receiver's contact number
+                    )
+
+                    database.child("Donations").child(donationKey).updateChildren(donationUpdates)
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
                                 dismiss() // Close the popup
