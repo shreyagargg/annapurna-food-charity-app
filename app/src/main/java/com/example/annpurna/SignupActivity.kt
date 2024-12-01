@@ -96,10 +96,14 @@ class SignupActivity : AppCompatActivity() {
 
                         // Add user data to Firebase Realtime Database
                         val user = User(
-                            name = Name,
-                            email = mail,
-                            contactNumber = phone,
-                            password = pass
+                            name = if (Name.isEmpty()) "" else Name,
+                            email = if (mail.isEmpty()) "" else mail,
+                            contactNumber = if (phone.isEmpty()) "" else phone,
+                            password = if (pass.isEmpty()) "" else pass,
+                            address = null, // Set address as null
+                            pincode = null, // Set pincode as null
+                            state = null, // Set state as null
+                            city = null // Set city as null
                         )
                         userInfoRef.child(sanitizedEmail).setValue(user)
                             .addOnCompleteListener {
@@ -164,10 +168,14 @@ class SignupActivity : AppCompatActivity() {
         try {
             // Create a JSONObject with the user data
             val userJson = JSONObject()
-            userJson.put("name", name)
-            userJson.put("email", email)
-            userJson.put("contactNumber", phone)
-            userJson.put("password", password)
+            userJson.put("name", if (name.isEmpty()) "" else name)
+            userJson.put("email", if (email.isEmpty()) "" else email)
+            userJson.put("contactNumber", if (phone.isEmpty()) "" else phone)
+            userJson.put("password", if (password.isEmpty()) "" else password)
+            userJson.put("address", JSONObject.NULL)  // Set address as null
+            userJson.put("pincode", JSONObject.NULL)  // Set pincode as null
+            userJson.put("state", JSONObject.NULL)    // Set state as null
+            userJson.put("city", JSONObject.NULL)     // Set city as null
 
             // Save the JSON object to a file in internal storage
             val file = File(filesDir, "user_data.json")

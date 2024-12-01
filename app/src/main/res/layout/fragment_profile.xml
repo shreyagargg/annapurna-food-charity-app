@@ -1,203 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/frame"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileFragment">
 
+    <!-- Background -->
     <com.example.annpurna.BGFile
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <ScrollView
+    <!-- Profile Header -->
+    <LinearLayout
+        android:id="@+id/profile_header"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <LinearLayout
-            android:id="@+id/profile_header"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="40dp"
+                android:background="@drawable/circle_bg"
+                android:src="@drawable/profile"
+                android:scaleType="centerCrop"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="50dp"
+                android:layout_toEndOf="@id/profile_image"
+                android:text="Name"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/profile_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="80dp"
+                android:layout_toEndOf="@id/profile_image"
+                android:text="Phone Number"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/profile_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/profile_image"
+                android:layout_marginTop="110dp"
+                android:layout_marginStart="30dp"
+                android:text="Email Address"
+                android:textSize="18sp"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+        <!-- TabLayout for Fragments -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            app:tabIndicatorColor="@color/copper"
+            app:tabTextColor="@color/white"
+            app:tabSelectedTextColor="@color/copper"
+            android:background="@drawable/card_bg">
 
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/profile"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginStart="40dp"
-                    android:background="@drawable/circle_bg"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/profile"
-                    android:transitionName="trans"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:id="@+id/phn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="80dp"
-                    android:layout_toEndOf="@id/profile"
-                    android:drawablePadding="10dp"
-                    android:text="Number"
-                    android:textColor="@color/white"
-                    android:textSize="22sp"
-                    android:textStyle="italic"
-                    app:drawableLeftCompat="@drawable/phone" />
-
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/profile"
-                    android:layout_marginTop="50dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="30dp"
-                    android:transitionName="names"
-                    android:text="Name"
-                    android:textColor="@color/white"
-                    android:drawablePadding="10dp"
-                    android:textSize="22sp"
-                    app:drawableLeftCompat="@drawable/name"
-                    android:textStyle="italic" />
-
-
-                <TextView
-                    android:id="@+id/mail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_toEndOf="@id/profile"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="80dp"
-                    android:drawablePadding="10dp"
-                    android:text="Hello"
-                    android:textColor="@color/white"
-                    android:textSize="22sp"
-                    android:textStyle="italic"
-                    app:drawableStartCompat="@drawable/email" />
-
-            </RelativeLayout>
-
-            <LinearLayout
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/history_tab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
+                android:text="History" />
 
-                <Button
-                    android:id="@+id/hist"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/hist"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    android:layout_marginEnd="8dp"
-                    android:backgroundTint="@color/copper"/>
-
-                <Button
-                    android:id="@+id/edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:text="@string/edit"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    android:backgroundTint="@color/copper"/>
-            </LinearLayout>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="30dp"
-                android:backgroundTint="@color/white"
-                app:cardCornerRadius="40dp"
-                app:cardElevation="10dp">
-
-                <EditText
-                    android:id="@+id/pc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:hint="@string/state"
-                    android:backgroundTint="#ffffff"
-                    android:textColor="@color/copper"
-                    android:textColorHint="@color/copper"
-                    android:textSize="30sp"
-                    android:textStyle="italic"
-                    android:inputType="number"/>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="30dp"
-                android:backgroundTint="@color/white"
-                app:cardCornerRadius="40dp"
-                app:cardElevation="10dp">
-
-                <TextView
-                    android:id="@+id/state"
-                    android:layout_width="392dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="20dp"
-                    android:backgroundTint="#ffffff"
-                    android:textColor="@color/copper"
-                    android:textSize="30sp"
-                    android:textStyle="italic" />
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/edit_tab"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:backgroundTint="@color/white"
-                app:cardCornerRadius="40dp"
-                app:cardElevation="10dp">
+                android:text="Edit Profile" />
+        </com.google.android.material.tabs.TabLayout>
 
-                <EditText
-                    android:id="@+id/address"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:hint="@string/address"
-                    android:backgroundTint="#ffffff"
-                    android:textColor="@color/copper"
-                    android:textColorHint="@color/copper"
-                    android:textSize="30sp"
-                    android:textStyle="italic"
-                    android:inputType="textMultiLine"/>
-            </androidx.cardview.widget.CardView>
+        <!-- Fragment Container -->
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="70dp" />
+    </LinearLayout>
 
-            <Button
-                android:id="@+id/update"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginStart="120dp"
-                android:layout_marginTop="30dp"
-                android:backgroundTint="@color/copper"
-                android:text="Update"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/logout"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginStart="120dp"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="@color/copper"
-                android:text="Logout"
-                android:textSize="22sp"/>
-
-        </LinearLayout>
-    </ScrollView>
+    <!-- Logout Button -->
+    <Button
+        android:id="@+id/logout_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_gravity="bottom"
+        android:text="Logout"
+        android:textColor="@color/white"
+        android:background="@drawable/card_bg" />
 </FrameLayout>
