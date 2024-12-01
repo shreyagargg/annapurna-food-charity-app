@@ -3,6 +3,7 @@ package com.example.annpurna
 data class Donations(
     val Dname: String, // Donor name (from local or Firebase)
     val Dcontact: String, // Donor contact (from local or Firebase)
+    val Dcity: String, // Donor city
     val foodItem: String, // Name of the food item
     val description: String, // Description of the food item
     val expiryDate: String, // Expiry date
