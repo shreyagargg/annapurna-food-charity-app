@@ -14,14 +14,4 @@
         <!-- Add rows dynamically -->
     </TableLayout>
 
-    <!-- Logout Button -->
-    <Button
-        android:id="@+id/logout_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Logout"
-        android:backgroundTint="@color/copper"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
 </LinearLayout>
