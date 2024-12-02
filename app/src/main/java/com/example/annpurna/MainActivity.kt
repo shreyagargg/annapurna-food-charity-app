@@ -1,6 +1,5 @@
 package com.example.annpurna
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.FrameLayout
 import android.widget.TextView
@@ -12,6 +11,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import org.json.JSONObject
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
@@ -65,13 +66,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         val name = findViewById<TextView>(R.id.name)
-        loadSavedData(name)
+        loadUserNameFromLocalJson(name)
     }
 
-    private fun loadSavedData(data: TextView) {
-        val sharedPreferences: SharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
-        val savedText = sharedPreferences.getString("savedText", "data")
-        data.text = "Hello $savedText"
+    private fun loadUserNameFromLocalJson(nameTextView: TextView) {
+        val userFile = File(filesDir, "user_data.json")
+
+        if (userFile.exists()) {
+            val userJson = JSONObject(userFile.readText())
+            val username = userJson.optString("name", "User")
+            nameTextView.text = "Hello!! $username"
+        } else {
+            nameTextView.text = "Hello!! User"
+        }
     }
 
     private fun checkUserDetailsAndLoadFragment() {

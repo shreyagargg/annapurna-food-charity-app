@@ -27,11 +27,11 @@
                 android:id="@+id/profile_image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="40dp"
                 android:layout_marginStart="40dp"
+                android:layout_marginTop="40dp"
                 android:background="@drawable/circle_bg"
-                android:src="@drawable/profile"
                 android:scaleType="centerCrop"
+                android:src="@drawable/profile"
                 app:tint="@color/white" />
 
             <TextView
