@@ -109,5 +109,5 @@
         android:layout_gravity="bottom"
         android:text="Logout"
         android:textColor="@color/white"
-        android:background="@drawable/card_bg" />
+        android:backgroundTint="@color/copper" />
 </FrameLayout>
