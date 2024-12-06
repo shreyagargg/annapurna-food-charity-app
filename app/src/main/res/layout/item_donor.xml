@@ -127,11 +127,6 @@
                 android:layout_marginTop="8dp"
                 android:backgroundTint="#00000000" />
 
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>
